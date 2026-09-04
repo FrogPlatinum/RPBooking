@@ -1,28 +1,34 @@
-﻿namespace RPBooking.Features.Events
+﻿using RPBooking.Features.Bookings;
+
+namespace RPBooking.Features.Events
 {
     public class Event
     {
         public int Id { get; set; }
-        public string titel { get; set; } = string.Empty;
-        public EventType eventType { get; set; }
-        public enum EventType
-        {
-            FuldtBooket,
-            BordrollespilEnkelt,
-            BordrollespilGruppe,
-            LiverollespilEnkelt,
-            LiverollespilGruppe
-        }
-        public EventStatus eventStatus { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public DateTime Date { get; set; }
+        public string AgeRes { get; set; }
+        public double Price { get; set; }
+        public int MinParticipant { get; set; }
+        public int MaxParticipant { get; set; }
+        public bool PrivateEvent { get; set; }
+        public List<Booking>? Bookings { get; set; }
+        public EventStatus Status { get; set; }
         public enum EventStatus
         {
-            Planlagt,
-            Afholdt,
-            Annulleret
+            Cancelled,
+            Completed,
+            Scheduled,
+            Full
         }
-        public DateTime tidspunkt { get; set; }
-        public int aldersgraense { get; set; }
-        public int antalDeltager { get; set; }
-        public string? beskrivelse { get; set; }
+        public EventType Type { get; set; }
+        public enum EventType
+        {
+            TabletopRPSolo,
+            TabletopRPGroup,
+            LiveRPSolo,
+            LiveRPGroup
+        }
     }
 }
