@@ -10,6 +10,7 @@ export default function Index() {
       }}
     >
       <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Text>Her starter vores SUPER seje event planner!! :D</Text>
     </View>
   );
 }
