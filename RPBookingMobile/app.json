@@ -22,11 +22,17 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "output": "static",
+      "output": "server",
       "favicon": "./assets/images/TempIcon.png"
     },
     "plugins": [
-      "expo-router",
+      [
+        "expo-router",
+        {
+         // "origin": "https://"
+        }
+      ],
+      
       [
         "expo-splash-screen",
         {
