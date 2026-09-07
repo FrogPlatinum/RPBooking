@@ -8,6 +8,7 @@ namespace RPBooking.Infrastructure.Persistence
     {
         public DbSet<Event> Events => Set<Event>();
         public DbSet<Booking> Bookings => Set<Booking>();
+        public DbSet<Participant> Participants => Set<Participant>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -18,11 +19,11 @@ namespace RPBooking.Infrastructure.Persistence
             {
                 builder.HasKey(e => e.Id);
 
-                builder.Property(e => e.titel)
+                builder.Property(e => e.Title)
                 .IsRequired()
                 .HasMaxLength(200);
 
-                builder.Property(e => e.beskrivelse)
+                builder.Property(e => e.Description)
                 .HasMaxLength(2000);
             });
         }

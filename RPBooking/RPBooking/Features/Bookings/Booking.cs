@@ -6,8 +6,8 @@
         public string ContactName { get; set; } = string.Empty;
         public string ContactEmail { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
-        public int ParticipantAmount { get; set; }
-        public List<Participant> Participants { get; set; }
-        public string? note { get; set; }
+        public int ParticipantCount => Participants.Count;
+        public List<Participant> Participants { get; set; } = new();
+        public string? Note { get; set; }
     }
 }
