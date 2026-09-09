@@ -7,7 +7,7 @@ export default function Index() {
     <View style={styles.container}>
       <Text style={styles.element}>Edit app/index.tsx to edit this screen.</Text>
       <Text>Her starter vores SUPER seje event planner!! :D</Text>
-      <Link href="/testgetapidata">Gå til Api Test!</Link>
+      <Link href="/BackendConnectTest">Gå til Api Test!</Link>
     </View>
   );
 }
@@ -17,9 +17,9 @@ const styles = StyleSheet.create({
     flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "purple",
+        backgroundColor: "#f2e7b1",
   },
   element: {
-    color: "#a8ebeb"
+    color: "#2e9696"
   }
 })
