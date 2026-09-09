@@ -59,7 +59,7 @@ namespace RPBooking.Infrastructure.Persistence
                     PrivateEvent = false,
                     Bookings = sampleBooking,
                     Status = EventStatus.Scheduled,
-                    Type = EventType.TabletopRPGroup
+                    Type = EventType.TabletopRP
                 }
             };
 

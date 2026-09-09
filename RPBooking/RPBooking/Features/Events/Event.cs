@@ -25,10 +25,8 @@ namespace RPBooking.Features.Events
         public EventType Type { get; set; }
         public enum EventType
         {
-            TabletopRPSolo,
-            TabletopRPGroup,
-            LiveRPSolo,
-            LiveRPGroup
+            TabletopRP,
+            LiveRP
         }
     }
 }

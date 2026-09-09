@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RPBooking.Infrastructure.Persistence;
 using Scalar.AspNetCore;
+using MediatR;
+using RPBooking.Features;
 
 namespace RPBooking
 {
@@ -23,15 +25,22 @@ namespace RPBooking
                 (options => options.UseSqlServer
                 (builder.Configuration.GetConnectionString("DomainDBConnection")));
 
+            //Registering MediatR
+            builder.Services.AddMediatR(typeof(Program));
+
             var app = builder.Build();
 
-            //Test API Endpoint
+            //Endpoints
             app.MapGet("/api/test", () => Results.Ok(new
             {
                 Status = "Online",
                 Message = "Hello :)",
                 Timestamp = DateTime.Now,
             }));
+
+            app.MapFeatureEndpoints();
+
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -47,7 +56,7 @@ namespace RPBooking
 
                 app.MapScalarApiReference(options =>
                 {
-                    options.WithTitle("Slottet Backend");
+                    options.WithTitle("RP Booking Backend");
                     options.WithTheme(ScalarTheme.DeepSpace);
                     options.WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
                 });
