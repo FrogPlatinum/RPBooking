@@ -1,4 +1,4 @@
-import {View, Text, Button, StyleSheet} from 'react-native';
+import {View, Text, Button, StyleSheet, ActivityIndicator} from 'react-native';
 import {useState} from 'react';
 
 //This is a very stripped down way to see if we have connection to our backend. The only thing displayed is in the log files in the terminal.
@@ -10,10 +10,14 @@ import {useState} from 'react';
 */
 export default function BackendConnectTest(){
   const [message, setMessage] = useState('');
-
+  const [isLoading, setLoading] = useState(false);
+ 
   const testBackend = async () => {
   try {
+    setLoading(true);
     console.log('Sending request...');
+
+   
 
     const response = await fetch('http://10.0.2.2:5224/api/test', { //<-- Here we insert the http! When using android we also need the additional '10.0.2.2:' instead of 'localhost'
       method: 'GET',
@@ -26,7 +30,7 @@ export default function BackendConnectTest(){
       //   secondParam: 'yourSecondValue',
       // }), <- for POST!
     });
-
+    
     console.log('Response status:', response.status);
 
     const data = await response.json();
@@ -36,6 +40,10 @@ export default function BackendConnectTest(){
     console.log('Response body:', data);
   } catch (error) {
     console.error('Request failed:', error)
+    setMessage("Failed to connect to API :(");
+    
+  } finally {
+    setLoading(false);
   }
 };
 
@@ -45,7 +53,10 @@ return (
     <Button
      title="Test Backend" onPress={testBackend}
      />
+     {isLoading ? (<ActivityIndicator/>) : ( 
+     
      <Text style={styles.coolText}>{message}</Text>
+    )}
   </View>
 );
 
@@ -56,12 +67,16 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#f2e7b1",
+       
   },
   coolText: {
     color: "#2e9696",
-    fontSize: 50,
+    fontSize: 30,
     fontFamily:'ui-monospace',
-    outline: "true",
-    outlineColor: "red",
+    // outline: "true",
+    // outlineColor: "red",
+    // outlineWidth: 3,
+    padding: 10,
+
   }
 })
