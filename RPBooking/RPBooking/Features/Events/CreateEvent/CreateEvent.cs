@@ -35,7 +35,7 @@ namespace RPBooking.Features.Events.CreateEvent
                     MinParticipant = request.MinParticipant,
                     MaxParticipant = request.MaxParticipant,
                     PrivateEvent = request.PrivateEvent,
-                    Status = EventStatus.Scheduled,
+                    Status = request.Status,
                     Type = request.Type
                 };
 
