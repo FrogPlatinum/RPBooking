@@ -12,7 +12,7 @@ const testBackend = async () => {
   try {
     console.log('Sending request...');
 
-    const response = await fetch('http://10.0.2.2:5224/api/test', { //<-- Here we insert the http! When using android we also need the additional '10.0.2.2:' instead of 'localhost', also android has problems with connecting to https, so
+    const response = await fetch('http://10.0.2.2:5224/api/test', { //<-- Here we insert the http! When using android we also need the additional '10.0.2.2:' instead of 'localhost', also android has problems with connecting to https, so for now, before deployment, just use http (and run the http in VS, not the https)
       method: 'GET',
       headers: {
         Accept: 'application/json',
