@@ -1,4 +1,4 @@
-name: .NET Core CI
+name: Build and Test
 on:
   push:
     branches: ["main"]
@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: "9.0.x"
+        dotnet-version: 9.0
 
     - name: Restore Dependencies
       run: dotnet restore RPBooking.sln
