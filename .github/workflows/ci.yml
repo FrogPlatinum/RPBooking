@@ -25,4 +25,4 @@ jobs:
       run: dotnet build RPBooking/RPBooking.sln --no-restore
 
     - name: Run Tests
-      run: dotnet run RPBooking/RPBooking.sln --no-build --verbosity normal 
+      run: dotnet run RPBooking/RPBooking.UnitTests --no-build --verbosity normal 
