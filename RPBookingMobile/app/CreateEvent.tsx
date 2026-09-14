@@ -2,21 +2,32 @@ import {View, Text, Button, StyleSheet, TextInput} from 'react-native';
 import {useState} from 'react';
 
 export default function createEvent(){
-const [text, onChangeText] = useState('Tekst');
-const [number, onChangeNumber] = useState('');
+
+const [title, setTitle] = useState('');
+const [description, setDescription] = useState('');
+const [date, setDate] = useState('');
+const [ageRes, setAgeRes] = useState('');
+const [price, setPrice] = useState('');
+const [minParticipant, setMinParticipant] = useState('');
+const [maxParticipant, setMaxParticipant] = useState('');
+const [privateEvent, setPrivateEvent] = useState('');
+const [eventStatus, setEventStatus] = useState('');
+const [eventType, setEventType] = useState('');
+
+
 const [message, setMessage] = useState('');
-type Event= {
-  Title: string;
-  Description: string;
-  Date: Date;
-  AgeRes: string;
-  Price: number;
-  MinParticipant: number;
-  MaxParticipant: number;
-  PrivateEvent: boolean;
-  EventStatus: string; // For now, since I'm not sure if typescript has enums
-  EventType: string; // For now, since I'm not sure if typescript has enums
-};
+// type Event= {
+//   Title: string;
+//   Description: string;
+//   Date: Date;
+//   AgeRes: string;
+//   Price: number;
+//   MinParticipant: number;
+//   MaxParticipant: number;
+//   PrivateEvent: boolean;
+//   EventStatus: string; // For now, since I'm not sure if typescript has enums
+//   EventType: string; // For now, since I'm not sure if typescript has enums
+// };
 
 // type EventResponse = {
 //   events: Event[];
@@ -33,16 +44,16 @@ const createEvent = async () => {
         'Content-Type': 'application/json', 
       },
       body: JSON.stringify({
-      Title: '',
-      Description: '',
-      Date: Date,
-      AgeRes: '',
-      Price: '',
-      MinParticipant: '',
-      MaxParticipant: '',
-      PrivateEvent: '',
-      EventStatus: '', 
-      EventType: '',
+      title, 
+      description,
+      date,
+      ageRes,
+      price,
+      minParticipant,
+      maxParticipant,
+      privateEvent,
+      eventStatus,
+      eventType,
       }), 
     });
 
@@ -61,16 +72,69 @@ return (
    <Text>Opret Event</Text>
     <TextInput
           style={styles.input}
-          onChangeText={onChangeText}
-          value={text}
+          placeholder='Titel'
+          value={title}
+          onChangeText={(text)=> setTitle(text)}  
         />
         <TextInput
           style={styles.input}
-          onChangeText={onChangeNumber}
-          value={number}
-          placeholder="0"
-          keyboardType="numeric"
+          placeholder='Beskrivelse'
+          value={description}
+          onChangeText={(text)=> setDescription(text)}  
         />
+        <TextInput
+          style={styles.input}
+          placeholder='Dato'
+          value={date}
+          onChangeText={(text)=> setDate(text)}  
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Aldersrestriktioner'
+          value={ageRes}
+          onChangeText={(text)=> setAgeRes(text)}  
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Pris'
+          value={price}
+          onChangeText={(text)=> setPrice(text)}  
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Min Deltagere'
+          value={minParticipant}
+          onChangeText={(text)=> setMinParticipant(text)}  
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Max Deltagere'
+          value={maxParticipant}
+          onChangeText={(text)=> setMaxParticipant(text)}  
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Privat Event (true/false)'
+          value={privateEvent}
+          onChangeText={(text)=> setPrivateEvent(text)}  
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Eventstatus'
+          value={eventStatus}
+          onChangeText={(text)=> setEventStatus(text)}  
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder='Eventtype'
+          value={eventType}
+          onChangeText={(text)=> setEventType(text)}  
+        />
+      
+
+        
+
     <Button
      title="Opret Event" onPress={createEvent}
      />
@@ -90,6 +154,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
+    minWidth: 180,
     margin: 12,
     borderWidth: 1,
     padding: 10,

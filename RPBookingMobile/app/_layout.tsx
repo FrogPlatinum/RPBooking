@@ -4,8 +4,7 @@ export default function RootLayout() {
    return (
     <Stack>
       <Stack.Screen name="index" options={{ title: 'Home' }} />
-      <Stack.Screen name="testgetapidata" options={{ title: 'TestSite' }} />
-      <Stack.Screen name="BackendConnectTest" options={{ title: 'BackendConnect' }} />
+      <Stack.Screen name="CreateEvent" options={{ title: 'CreateEvent' }} />
     </Stack>
   );
 }
