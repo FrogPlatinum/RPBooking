@@ -1,4 +1,4 @@
-import {View, Text, Button, StyleSheet, TextInput} from 'react-native';
+import {View, Text, Button, StyleSheet, TextInput, Pressable} from 'react-native';
 import {useState} from 'react';
 
 export default function createEvent(){
@@ -11,10 +11,11 @@ const [price, setPrice] = useState('');
 const [minParticipant, setMinParticipant] = useState('');
 const [maxParticipant, setMaxParticipant] = useState('');
 const [privateEvent, setPrivateEvent] = useState('');
-const [eventStatus, setEventStatus] = useState('');
-const [eventType, setEventType] = useState('');
+const [status, setStatus] = useState('');
+const [type, setType] = useState('');
 
-
+const eventStatuses = [ 'Cancelled', 'Completed', 'Scheduled', 'Full', ]; 
+const eventTypes = [ 'Concert', 'Sport', 'Party', 'Other', ];
 const [message, setMessage] = useState('');
 // type Event= {
 //   Title: string;
@@ -47,13 +48,13 @@ const createEvent = async () => {
       title, 
       description,
       date,
-      ageRes,
-      price,
-      minParticipant,
-      maxParticipant,
+      ageRes: Number (ageRes),
+      price: Number (price),
+      minParticipant: Number (minParticipant),
+      maxParticipant: Number (maxParticipant),
       privateEvent,
-      eventStatus,
-      eventType,
+      status: eventStatuses,
+      type: eventTypes,
       }), 
     });
 
@@ -98,19 +99,22 @@ return (
           style={styles.input}
           placeholder='Pris'
           value={price}
-          onChangeText={(text)=> setPrice(text)}  
+          onChangeText={(text)=> setPrice(text)}
+          keyboardType="numeric"  
         />
         <TextInput
           style={styles.input}
           placeholder='Min Deltagere'
           value={minParticipant}
-          onChangeText={(text)=> setMinParticipant(text)}  
+          onChangeText={(text)=> setMinParticipant(text)} 
+          keyboardType="numeric"
         />
         <TextInput
           style={styles.input}
           placeholder='Max Deltagere'
           value={maxParticipant}
           onChangeText={(text)=> setMaxParticipant(text)}  
+          keyboardType="numeric"
         />
         <TextInput
           style={styles.input}
@@ -121,15 +125,23 @@ return (
         <TextInput
           style={styles.input}
           placeholder='Eventstatus'
-          value={eventStatus}
-          onChangeText={(text)=> setEventStatus(text)}  
-        />
+          value={status}
+          onChangeText={(text)=> setStatus(text)}  
+          />
+          <View>
+          <Pressable>
+           
+
+          </Pressable>
+          </View>
+          
+
 
         <TextInput
           style={styles.input}
           placeholder='Eventtype'
-          value={eventType}
-          onChangeText={(text)=> setEventType(text)}  
+          value={type}
+          onChangeText={(text)=> setType(text)}  
         />
       
 
