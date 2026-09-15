@@ -16,7 +16,8 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 9.0
+        dotnet-version: '9.0.x'
+        global-json-file: 'global.json'
 
     - name: Restore Dependencies
       run: dotnet restore RPBooking/RPBooking.sln
@@ -25,4 +26,4 @@ jobs:
       run: dotnet build RPBooking/RPBooking.sln --no-restore
 
     - name: Run Tests
-      run: dotnet run RPBooking/RPBooking.sln --no-build --verbosity normal 
+      run: dotnet test RPBooking/UnitTests/UnitTests.csproj --no-build --verbosity normal 
