@@ -9,6 +9,8 @@ export default function Index() {
       <Text>Her starter vores SUPER seje event planner!! :D</Text>
       {/* <Link href="/BackendConnectTest">Gå til Api Test!</Link> */}
       <Link style={styles.link} href="/CreateEvent">Opret Event!</Link>
+      <Link style={styles.link} href="/GetEvents">Se Alle Events!</Link>
+      {/* <Link style={styles.link} href="/templates/testgetapidata">Se Alle Events (test)!</Link> */}
     </View>
   );
 }
