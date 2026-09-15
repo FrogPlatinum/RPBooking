@@ -3,6 +3,7 @@ import {useState} from 'react';
 
 export default function createEvent(){
 
+
 const [title, setTitle] = useState('');
 const [description, setDescription] = useState('');
 const [date, setDate] = useState('');
@@ -13,26 +14,12 @@ const [maxParticipant, setMaxParticipant] = useState('');
 const [privateEvent, setPrivateEvent] = useState('');
 const [status, setStatus] = useState('');
 const [type, setType] = useState('');
-
-const eventStatuses = [ 'Cancelled', 'Completed', 'Scheduled', 'Full', ]; 
-const eventTypes = [ 'Concert', 'Sport', 'Party', 'Other', ];
 const [message, setMessage] = useState('');
-// type Event= {
-//   Title: string;
-//   Description: string;
-//   Date: Date;
-//   AgeRes: string;
-//   Price: number;
-//   MinParticipant: number;
-//   MaxParticipant: number;
-//   PrivateEvent: boolean;
-//   EventStatus: string; // For now, since I'm not sure if typescript has enums
-//   EventType: string; // For now, since I'm not sure if typescript has enums
-// };
 
-// type EventResponse = {
-//   events: Event[];
-// };
+//We're not using these yet, but we might need them at some point, so I'm keeping them here :)
+const eventStatuses = [ 'Cancelled', 'Completed', 'Scheduled', 'Full', ]; 
+const eventTypes = [ 'TabletopRP', 'LiveRP' ];
+
 //Making the post request!
 const createEvent = async () => {
   try {
@@ -45,16 +32,18 @@ const createEvent = async () => {
         'Content-Type': 'application/json', 
       },
       body: JSON.stringify({
-      title, 
-      description,
-      date,
-      ageRes: Number (ageRes),
-      price: Number (price),
-      minParticipant: Number (minParticipant),
-      maxParticipant: Number (maxParticipant),
-      privateEvent,
-      status: eventStatuses,
-      type: eventTypes,
+ 
+          title,
+          description,
+          date, // Format: 2026-10-20T18:00:00
+          ageRes: Number (ageRes),
+          price: Number (price),
+          minParticipant: Number (minParticipant),
+          maxParticipant: Number (maxParticipant),
+          privateEvent: Boolean (privateEvent),
+          status: Number (status), //We can change these later if we wanna make it into the enums rather than just a number, but the number works for now!
+          type:  Number (type), //We can change these later if we wanna make it into the enums rather than just a number, but the number works for now!
+
       }), 
     });
 
@@ -68,6 +57,8 @@ const createEvent = async () => {
   }
 };
 
+
+// Frontend starts HERE! (close to html)
 return (
   <View style={styles.container}>
    <Text>Opret Event</Text>
@@ -93,7 +84,8 @@ return (
           style={styles.input}
           placeholder='Aldersrestriktioner'
           value={ageRes}
-          onChangeText={(text)=> setAgeRes(text)}  
+          onChangeText={(text)=> setAgeRes(text)} 
+          keyboardType="numeric"   
         />
         <TextInput
           style={styles.input}
@@ -124,13 +116,14 @@ return (
         />
         <TextInput
           style={styles.input}
-          placeholder='Eventstatus'
+          placeholder='Eventstatus (0-3)'
           value={status}
           onChangeText={(text)=> setStatus(text)}  
+          keyboardType="numeric"
           />
           <View>
           <Pressable>
-           
+           {/* Nothing in here yet, but I think this is the way to go with our enums! */}
 
           </Pressable>
           </View>
@@ -139,9 +132,10 @@ return (
 
         <TextInput
           style={styles.input}
-          placeholder='Eventtype'
+          placeholder='Eventtype (0-1)'
           value={type}
           onChangeText={(text)=> setType(text)}  
+          keyboardType="numeric"
         />
       
 
@@ -154,6 +148,9 @@ return (
 );
 
 }
+
+// Styling here :) (close to css)
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -7,7 +7,8 @@ export default function Index() {
     <View style={styles.container}>
       <Text style={styles.element}>Edit app/index.tsx to edit this screen.</Text>
       <Text>Her starter vores SUPER seje event planner!! :D</Text>
-      <Link href="/CreateEvent">Gå til Api Test!</Link>
+      {/* <Link href="/BackendConnectTest">Gå til Api Test!</Link> */}
+      <Link style={styles.link} href="/CreateEvent">Opret Event!</Link>
     </View>
   );
 }
@@ -21,5 +22,9 @@ const styles = StyleSheet.create({
   },
   element: {
     color: "#2e9696"
+  },
+  link: {
+    textDecorationLine: "underline",
   }
+
 })
