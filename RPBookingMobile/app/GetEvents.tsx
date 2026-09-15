@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 
-// This is taken from "https://reactnative.dev/docs/network" to see if we can get something going! I redid it to get events from our backend :)
+// This is taken from "https://reactnative.dev/docs/network"! I redid it to get events from our backend :)
 type Event= {
   id: number;
   title: string;
