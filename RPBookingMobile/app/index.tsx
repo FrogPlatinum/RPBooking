@@ -10,6 +10,7 @@ export default function Index() {
       {/* <Link href="/BackendConnectTest">Gå til Api Test!</Link> */}
       <Link style={styles.link} href="/CreateEvent">Opret Event!</Link>
       <Link style={styles.link} href="/GetEvents">Se Alle Events!</Link>
+      <Link style={styles.link} href="/GetEventById">Se ét Event!</Link>
       {/* <Link style={styles.link} href="/templates/testgetapidata">Se Alle Events (test)!</Link> */}
     </View>
   );
