@@ -50,4 +50,4 @@ jobs:
           context: .
           file: ./RPBooking/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/rpbooking-api:latest
+          tags: ghcr.io/frogplatinum/rpbooking-api:latest
