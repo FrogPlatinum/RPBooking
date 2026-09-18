@@ -30,7 +30,7 @@ namespace RPBooking
 
             var app = builder.Build();
 
-            //Endpoints
+            //Endpoints move test to Endpointextension
             app.MapGet("/api/test", () => Results.Ok(new
             {
                 Status = "Online",
