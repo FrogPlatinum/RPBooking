@@ -25,6 +25,20 @@ namespace RPBooking.Infrastructure.Persistence
 
                 builder.Property(e => e.Description)
                 .HasMaxLength(2000);
+
+                builder.HasMany(e => e.Bookings)
+                .WithOne()
+                .HasForeignKey("EventId")
+                .OnDelete(DeleteBehavior.Cascade);
+
+            });
+
+            modelBuilder.Entity<Booking>(builder =>
+            {
+                builder.HasMany(b => b.Participants)
+                .WithOne()
+                .HasForeignKey("BookingId")
+                .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }
