@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using RPBooking.Features.Bookings;
 using RPBooking.Features.Events;
 using static RPBooking.Features.Events.Event;
@@ -13,12 +12,13 @@ namespace RPBooking.Infrastructure.Persistence
             //Ensure Migrations are applied automatically
             await context.Database.MigrateAsync();
 
-            //Only seed if any table is missing
-            if (await context.Events.AnyAsync() || await context.Bookings.AnyAsync() || await context.Participants.AnyAsync())
+            //Only seed if events are missing
+            if (await context.Events.AnyAsync())
             {
                 return;
             }
 
+            //Seed initial baseline data
             await SeedDataAsync(context);
 
         }
@@ -45,6 +45,7 @@ namespace RPBooking.Infrastructure.Persistence
                 }
             };
 
+
             var sampleEvents = new List<Event>
             {
                 new()
@@ -58,6 +59,21 @@ namespace RPBooking.Infrastructure.Persistence
                     MaxParticipant = 6,
                     PrivateEvent = false,
                     Bookings = sampleBooking,
+                    Status = EventStatus.Scheduled,
+                    Type = EventType.TabletopRP
+                },
+
+                new()
+                {
+                    Title = "Mothership One-Shot",
+                    Description = "The mining colony in Ypsilon 14 has gone silent..",
+                    Date= DateTime.UtcNow.AddDays(14),
+                    AgeRes = 18,
+                    Price = 200.00,
+                    MinParticipant = 3,
+                    MaxParticipant = 6,
+                    PrivateEvent = true,
+                    Bookings = new List<Booking>(),
                     Status = EventStatus.Scheduled,
                     Type = EventType.TabletopRP
                 }
