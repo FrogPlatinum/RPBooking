@@ -30,7 +30,7 @@ namespace RPBooking
 
             var app = builder.Build();
 
-            //Endpoints
+            //move test to Endpointextension
             app.MapGet("/api/test", () => Results.Ok(new
             {
                 Status = "Online",
@@ -38,8 +38,10 @@ namespace RPBooking
                 Timestamp = DateTime.Now,
             }));
 
+            //Endpoints
             app.MapFeatureEndpoints();
 
+            //TESTING WHETHER CI/CD PIPELINE IS WORKING!!!!!!!!
 
 
             // Configure the HTTP request pipeline.

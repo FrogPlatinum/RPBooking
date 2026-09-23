@@ -26,12 +26,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
     <PackageReference Include="Scalar.AspNetCore" Version="2.17.2" />
-    <PackageReference Include="xunit.v3" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Features\Bookings\BookEvent\" />
-    <Folder Include="Features\Events\DeleteEvent\" />
     <Folder Include="Features\Events\UpdateEvent\" />
   </ItemGroup>
 

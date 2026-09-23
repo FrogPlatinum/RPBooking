@@ -1,4 +1,5 @@
 ﻿using RPBooking.Features.Events.CreateEvent;
+using RPBooking.Features.Events.DeleteEvent;
 using RPBooking.Features.Events.GetEventById;
 using RPBooking.Features.Events.GetEvents;
 
@@ -11,6 +12,7 @@ namespace RPBooking.Features
             app.MapCreateEventEndpoint();
             app.MapGetEventByIdEndpoint();
             app.MapGetEventsEndpoint();
+            app.MapDeleteEventEndpoint();
         }
     }
 }

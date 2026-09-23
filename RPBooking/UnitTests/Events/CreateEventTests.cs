@@ -7,17 +7,17 @@ namespace RPBooking.Features.Events.CreateEvent
 {
     public class CreateEventTests : IDisposable
     {
-        private readonly SqliteConnection _conection;
+        private readonly SqliteConnection _connection;
         private readonly AppDbContext _context;
 
         //SQLite in-memory
         public CreateEventTests()
         {
-            _conection = new SqliteConnection("Filename=:memory:");
-            _conection.Open();
+            _connection = new SqliteConnection("Filename=:memory:");
+            _connection.Open();
 
             var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseSqlite(_conection)
+                .UseSqlite(_connection)
                 .Options;
 
             _context = new AppDbContext(options);
@@ -58,7 +58,7 @@ namespace RPBooking.Features.Events.CreateEvent
         public void Dispose()
         {
             _context.Dispose();
-            _context.Dispose();
+            _connection.Dispose();
         }
     }
 }
