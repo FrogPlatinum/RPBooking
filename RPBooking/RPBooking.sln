@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPBooking", "RPBooking\RPBo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{10B52CE8-47F6-4255-9784-6F1B12854E4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{BE6CFE48-E3D1-4530-BB73-DA35AEB3720E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{10B52CE8-47F6-4255-9784-6F1B12854E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10B52CE8-47F6-4255-9784-6F1B12854E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10B52CE8-47F6-4255-9784-6F1B12854E4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE6CFE48-E3D1-4530-BB73-DA35AEB3720E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE6CFE48-E3D1-4530-BB73-DA35AEB3720E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE6CFE48-E3D1-4530-BB73-DA35AEB3720E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE6CFE48-E3D1-4530-BB73-DA35AEB3720E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
