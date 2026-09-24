@@ -18,7 +18,7 @@ namespace RPBooking.Features.Events.CreateEvent
             bool PrivateEvent,
             EventStatus Status,
             EventType Type
-        ): IRequest<int>;
+        ) : IRequest<int>;
 
         //Handler
         public class Handler(AppDbContext context) : IRequestHandler<Command, int>

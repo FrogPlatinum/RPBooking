@@ -2,6 +2,7 @@
 using RPBooking.Features.Events.DeleteEvent;
 using RPBooking.Features.Events.GetEventById;
 using RPBooking.Features.Events.GetEvents;
+using RPBooking.Features.Events.UpdateEvent;
 
 namespace RPBooking.Features
 {
@@ -13,6 +14,7 @@ namespace RPBooking.Features
             app.MapGetEventByIdEndpoint();
             app.MapGetEventsEndpoint();
             app.MapDeleteEventEndpoint();
+            app.MapUpdateEventEndpoint();
         }
     }
 }

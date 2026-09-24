@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace UnitTests.Events
+{
+    public class DeleteEventTests : IDisposable
+    {
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
