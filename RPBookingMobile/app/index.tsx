@@ -7,7 +7,12 @@ export default function Index() {
     <View style={styles.container}>
       <Text style={styles.element}>Edit app/index.tsx to edit this screen.</Text>
       <Text>Her starter vores SUPER seje event planner!! :D</Text>
-      <Link href="/BackendConnectTest">Gå til Api Test!</Link>
+      <Link href="/CreateEvent">Opret Event!</Link>
+      <Link href="/GetEvents">Se alle Events!</Link>
+      <Link href="/GetEventById"> Se ét Event</Link>
+      <Link href="/EditEvent">Rediger Event!</Link>
+      
+      
     </View>
   );
 }

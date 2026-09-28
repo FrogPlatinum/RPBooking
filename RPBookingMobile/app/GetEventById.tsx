@@ -1,4 +1,4 @@
-import {View, Text, Button, StyleSheet, ActivityIndicator, TextInput} from 'react-native';
+import {View, Text, Button, StyleSheet, ActivityIndicator, TextInput, KeyboardAvoidingView} from 'react-native';
 import {useState} from 'react';
 
 //This is a very stripped down way to see if we have connection to our backend. The only thing displayed is in the log files in the terminal.
@@ -8,28 +8,25 @@ import {useState} from 'react';
  LOG  Response status: 200
  LOG  Response body: (the body of the response)
 */
-export default function BackendConnectTest(){
+export default function GetEventById(){
   const [message, setMessage] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [id, setId] = useState('');
  
-  const testBackend = async () => {
+  const getEvent= async () => {
   try {
     setLoading(true);
-    console.log('Sending request...');
+    console.log('Sending GET request...');
 
    
 
-    const response = await fetch(`http://10.0.2.2:5000/api/events/${id}`, { //1/2  difference from BackendConnectTest 
+    const response = await fetch(`http://10.0.0.5:5000/api/events/${id}`, { //replace "10.0.0.5" with local private IPv4 for it to work on an actual phone, but the current one works for emulators.
       method: 'GET',
       headers: {
         Accept: 'application/json',
-        //'Content-Type': 'application/json', <- for POST and such!
+      
       },
-      // body: JSON.stringify({
-      //   firstParam: 'yourValue',
-      //   secondParam: 'yourSecondValue',
-      // }), <- for POST!
+      
     });
     
     console.log('Response status:', response.status);
@@ -37,7 +34,7 @@ export default function BackendConnectTest(){
     const data = await response.json();
 
    // setMessage(JSON.stringify(data)); <- also works, but then it's all in one line
-    setMessage(JSON.stringify(data, null, 2)); //<- 2/2 difference from BackendConnectTest, this returns our data as a string and seperates it into lines.
+    setMessage(JSON.stringify(data, null, 2)); 
 
     console.log('Response body:', data);
   } catch (error) {
@@ -46,6 +43,7 @@ export default function BackendConnectTest(){
     
   } finally {
     setLoading(false);
+    KeyboardAvoidingView
   }
 };
 
@@ -61,7 +59,7 @@ return (
              /> 
         {/* ^ Here I used the same logic as from CreateEvent. */}
     <Button
-     title="Hent Event" onPress={testBackend}
+     title="Hent Event" onPress={getEvent}
      />
      {isLoading ? (<ActivityIndicator/>) : ( 
      
