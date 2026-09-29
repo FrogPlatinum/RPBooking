@@ -5,7 +5,7 @@ using Xunit;
 
 namespace RPBooking.Features.Events.GetEventById
 {
-    public class GetEventByIdTests
+    public class GetEventByIdTests : IDisposable
     {
         private readonly SqliteConnection _connection;
         private readonly AppDbContext _context;
@@ -57,6 +57,12 @@ namespace RPBooking.Features.Events.GetEventById
             Assert.NotNull(result);
             Assert.Equal(1, result.Id);
             Assert.Contains(result.Title, "Call of Cthulhu Session");
+        }
+
+        public void Dispose()
+        {
+            _context.Dispose();
+            _connection.Dispose();
         }
     }
 }
