@@ -1,9 +1,11 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using RPBooking.Features.Events;
+using RPBooking.Features.Events.GetEventById;
 using RPBooking.Infrastructure.Persistence;
 using Xunit;
 
-namespace RPBooking.Features.Events.GetEventById
+namespace UnitTests.Events
 {
     public class GetEventByIdTests : IDisposable
     {

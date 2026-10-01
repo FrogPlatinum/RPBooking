@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using RPBooking.Infrastructure.Persistence;
 using Xunit;
 using System.Linq;
+using RPBooking.Features.Events;
+using RPBooking.Features.Events.GetEvents;
 
-namespace RPBooking.Features.Events.GetEvents
+namespace UnitTests.Events
 {
     public class GetEventsTests
     {
