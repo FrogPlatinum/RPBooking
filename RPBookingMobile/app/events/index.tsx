@@ -1,10 +1,20 @@
+import { getEvents } from "@/services/EventService";
 import { LinearGradient } from "expo-linear-gradient";
+import { useEffect, useState } from "react";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import { Event } from "../GetEvents";
+
 
 
 {/* main function for the events page with data in rows */}
 {/* background gradient will be changed to be the same on all pages */ }
 export default function Events() {
+  const [data, setData] = useState<Event[]>([]);
+   useEffect(() => {
+    getEvents()
+      .then(setData)
+      .catch((error) => console.error("Fejl ved henting af events:", error));
+  }, []);
   return (
     <LinearGradient
       colors={["#f2e7b1", "#f3f0de"]}
@@ -13,8 +23,8 @@ export default function Events() {
       style={styles.container}
     >
       <FlatList
-        data={Events}
-        keyExtractor={(item) => item.id}
+        data={data}
+        keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={styles.list}
         ListHeaderComponent={<Text style={styles.heading}>Kommende events</Text>}
         renderItem={({ item }) => (
@@ -24,13 +34,13 @@ export default function Events() {
             <View style={styles.row}>
               <Text style={styles.label}>Dato</Text>
               <Text style={styles.value}>
-                {item.date} kl. {item.time}
+                {item.date} kl. {item.date}
               </Text>
             </View>
 
             <View style={styles.row}>
               <Text style={styles.label}>Sted</Text>
-              <Text style={styles.value}>{item.location}</Text>
+              <Text style={styles.value}>{item.description}</Text>
             </View>
           </Pressable>
         )}
