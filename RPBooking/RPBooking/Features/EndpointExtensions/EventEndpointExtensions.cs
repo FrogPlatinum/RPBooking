@@ -4,11 +4,11 @@ using RPBooking.Features.Events.GetEventById;
 using RPBooking.Features.Events.GetEvents;
 using RPBooking.Features.Events.UpdateEvent;
 
-namespace RPBooking.Features
+namespace RPBooking.Features.EndpointExtensions
 {
-    public static class EndpointExtensions
+    public static class EventEndpointExtensions
     {
-        public static void MapFeatureEndpoints(this IEndpointRouteBuilder app)
+        public static void MapEventFeatureEndpoints(this IEndpointRouteBuilder app)
         {
             app.MapCreateEventEndpoint();
             app.MapGetEventByIdEndpoint();

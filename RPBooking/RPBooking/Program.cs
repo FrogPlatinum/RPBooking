@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using RPBooking.Infrastructure.Persistence;
 using Scalar.AspNetCore;
 using MediatR;
-using RPBooking.Features;
 using RPBooking.Exceptions;
+using RPBooking.Features.EndpointExtensions;
 
 namespace RPBooking
 {
@@ -46,7 +46,8 @@ namespace RPBooking
 
 
             //Endpoints
-            app.MapFeatureEndpoints();
+            app.MapEventFeatureEndpoints();
+            app.MapBookingFeatureEndpoints();
 
 
             // Configure the HTTP request pipeline.
