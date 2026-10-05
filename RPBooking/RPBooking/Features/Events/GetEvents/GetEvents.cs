@@ -32,6 +32,7 @@ namespace RPBooking.Features.Events.GetEvents
         {
             public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
             {
+                //Change this to linq too, like booking??
                 //Fetch from DB
                 var eventsFromDb = await context.Events.AsNoTracking().ToListAsync(cancellationToken);
 

@@ -32,15 +32,17 @@ namespace RPBooking.Features.Bookings.GetBookings
                 var bookingsFromDb = await context.Bookings.AsNoTracking().ToListAsync(cancellationToken);
 
                 //Mapping
-                var bookingDtos = bookingsFromDb.Select(b => new BookingDto(
+                var bookingDtos = await context.Bookings
+                    .AsNoTracking()
+                    .Select(b => new BookingDto(
                     b.Id,
                     b.ContactName,
                     b.ContactEmail,
                     b.PhoneNumber,
-                    b.ParticipantCount,
+                    b.Participants.Count,
                     b.Participants,
                     b.Note
-                    )).ToList();
+                    )).ToListAsync(cancellationToken);
 
                 return new Response(bookingDtos);
             }
