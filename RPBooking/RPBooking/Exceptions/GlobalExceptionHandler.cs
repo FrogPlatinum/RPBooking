@@ -12,22 +12,47 @@ namespace RPBooking.Exceptions
 
             var (statusCode, title, detail) = exception switch
             {
-                NotFoundException => (
-                    StatusCodes.Status404NotFound,
-                    "Resource Not Found",
-                    "Requested Resource Does Not Exist."
+                //400
+                BadRequestException => (
+                    StatusCodes.Status400BadRequest,
+                    "Bad Request",
+                    "Syntax or Business rule violation."
                 ),
-
+                //401
+                UnauthorizedException => (
+                    StatusCodes.Status401Unauthorized,
+                    "Unauthorized",
+                    "User must be logged in."
+                ),
+                //403
                 UnauthorizedAccessException => (
                     StatusCodes.Status403Forbidden,
                     "Forbidden",
-                    "Access Denied."
+                    "User does not have permission."
                 ),
-
+                //404
+                NotFoundException => (
+                    StatusCodes.Status404NotFound,
+                    "Resource Not Found",
+                    "Requested resource does not exist."
+                ),
+                //409
+                ConflictException =>(
+                    StatusCodes.Status409Conflict,
+                    "Conflict",
+                    "Resource already exists, or is not in a viable state."
+                ),
+                //422
+                UnprocessableEntityException =>(
+                    StatusCodes.Status422UnprocessableEntity,
+                    "Unprocessable Entity",
+                    "Validation failed"
+                ),
+                //500
                 _ => (
                     StatusCodes.Status500InternalServerError,
                     "Server Error",
-                    "Unknown Error."
+                    "Unexpected server error."
                 )
             };
 
