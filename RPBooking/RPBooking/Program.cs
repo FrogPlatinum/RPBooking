@@ -5,6 +5,7 @@ using RPBooking.Infrastructure.Persistence;
 using Scalar.AspNetCore;
 using MediatR;
 using RPBooking.Features;
+using RPBooking.Exceptions;
 
 namespace RPBooking
 {
@@ -28,6 +29,10 @@ namespace RPBooking
             //Registering MediatR
             builder.Services.AddMediatR(typeof(Program));
 
+            //Problem details service
+            builder.Services.AddProblemDetails();
+            builder.Services.AddExceptionHandler <GlobalExceptionHandler>();
+
             var app = builder.Build();
 
             //move test to Endpointextension
@@ -38,10 +43,10 @@ namespace RPBooking
                 Timestamp = DateTime.Now,
             }));
 
+
+
             //Endpoints
             app.MapFeatureEndpoints();
-
-            //TESTING WHETHER CI/CD PIPELINE IS WORKING!!!!!!!!
 
 
             // Configure the HTTP request pipeline.
@@ -68,8 +73,10 @@ namespace RPBooking
 
             app.UseAuthorization();
 
-
             app.MapControllers();
+
+            //Global exception handling middleware
+            app.UseExceptionHandler();
 
             app.Run();
         }
