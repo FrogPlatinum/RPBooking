@@ -32,23 +32,24 @@ namespace RPBooking.Features.Events.GetEvents
         {
             public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
             {
+                //Change this to linq too, like booking??
                 //Fetch from DB
                 var eventsFromDb = await context.Events.AsNoTracking().ToListAsync(cancellationToken);
 
                 //Mapping Entity to DTO
                 var eventDtos = eventsFromDb.Select(e => new EventDto(
-                        e.Id,
-                        e.Title,
-                        e.Description,
-                        e.Date,
-                        e.AgeRes,
-                        e.Price,
-                        e.MinParticipant,
-                        e.MaxParticipant,
-                        e.PrivateEvent,
-                        e.Status.ToString(),
-                        e.Type.ToString()
-                        )).ToList();
+                    e.Id,
+                    e.Title,
+                    e.Description,
+                    e.Date,
+                    e.AgeRes,
+                    e.Price,
+                    e.MinParticipant,
+                    e.MaxParticipant,
+                    e.PrivateEvent,
+                    e.Status.ToString(),
+                    e.Type.ToString()
+                    )).ToList();
 
                 return new Response(eventDtos);
             }

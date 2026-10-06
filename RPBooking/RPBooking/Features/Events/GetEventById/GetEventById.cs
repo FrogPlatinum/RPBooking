@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using RPBooking.Exceptions;
 using RPBooking.Infrastructure.Persistence;
 using static RPBooking.Features.Events.Event;
 
@@ -23,14 +24,14 @@ namespace RPBooking.Features.Events.GetEventById
         );
         
         //Query
-        public record Query(int Id) : IRequest<Response?>;
+        public record Query(int Id) : IRequest<Response>;
 
         //Handler
-        public class Handler(AppDbContext context) : IRequestHandler<Query, Response?>
+        public class Handler(AppDbContext context) : IRequestHandler<Query, Response>
         {
-            public async Task<Response?> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await context.Events
+                var result = await context.Events
                     .AsNoTracking()
                     .Where(e => e.Id == request.Id)
                     .Select(e => 
@@ -46,7 +47,15 @@ namespace RPBooking.Features.Events.GetEventById
                         e.PrivateEvent,
                         e.Status.ToString(),
                         e.Type.ToString()
-                        )).FirstOrDefaultAsync(cancellationToken);
+                     ))
+                    .FirstOrDefaultAsync(cancellationToken);
+
+                if(result == null)
+                {
+                    throw new NotFoundException();
+                }
+
+                return result;
                    
             }
         }
@@ -58,7 +67,7 @@ namespace RPBooking.Features.Events.GetEventById
             {
                 var response = await mediator.Send(new Query(id));
 
-                return response is null ? Results.NotFound(new { Message = $"Eventet med ID {id} findes ikke" }) : Results.Ok(response);
+                return Results.Ok(response);
             });
         }
     }
