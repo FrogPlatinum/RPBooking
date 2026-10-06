@@ -2,8 +2,10 @@ import { FlatList, Image, ActivityIndicator, Pressable, StyleSheet, Text, View }
 import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useEffect, useState } from "react";
 
+{/* The address of our backend API */}
 const API_URL = "http://10.0.2.2:5000/api/events";
 
+{/* Type definition for each event item */}
 type EventItem = {
   id: number;
   title: string;
@@ -18,13 +20,15 @@ type EventItem = {
   type: number | string;
 };
 
+{/* Lists for mapping status and type values to their string representations */}
 const eventStatuses = ["Cancelled", "Completed", "Scheduled", "Full"];
 const eventTypes = ["TabletopRP", "LiveRP"];
 
-// Viser tekst direkte, hvis backend sender enum som tekst, ellers slås tallet op
+{/* Maps a value to its corresponding string representation */}
 const label = (value: number | string, list: string[]) =>
   typeof value === "number" ? list[value] ?? String(value) : value;
 
+{/* Turns the date into readable Danish text */}
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString("da-DK", {
     day: "numeric",
@@ -32,18 +36,21 @@ const formatDate = (iso: string) =>
     year: "numeric",
   });
 
+{/* Turns the time into readable UI time "HH:MM" */}
 const formatTime = (iso: string) =>
   new Date(iso).toLocaleTimeString("da-DK", {
     hour: "2-digit",
     minute: "2-digit",
   });
 
+{/* Main component function. Event page with list of events, loading, refresh and error*/}  
 export default function Events() {
   const [events, setEvents] = useState<EventItem[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [isRefreshing, setRefreshing] = useState(false);
   const [error, setError] = useState("");
 
+{/* Fetches events from the backend API, saves if successful, error if not */}  
   const getEvents = useCallback(async () => {
     try {
       setError("");
@@ -55,7 +62,6 @@ export default function Events() {
         throw new Error(`Serveren svarede med status ${response.status}`);
       }
       const json = await response.json();
-      // Understøtter både [ ... ] og { events: [ ... ] }
       setEvents(Array.isArray(json) ? json : json.events ?? []);
     } catch (e) {
       console.error("Request failed:", e);
@@ -66,10 +72,17 @@ export default function Events() {
     }
   }, []);
 
+  {/* Runs getEvents when the page opens */}
   useEffect(() => {
     getEvents();
   }, [getEvents]);
 
+  {/* What the page shows on the screen */}
+  {/* LinearGradient = Background gradient */}
+  {/* isLoading =While loading, show a spinner. When done, show the event list */}
+  {/* Flatlist = A scrollable list with event items */}
+  {/* ListHeaderComponent = Header that is the logo */}
+  {/* ListEmptyComponent = If no events, show a message */}
   return (
     <LinearGradient
       colors={["#f2e7b1", "#f3f0de"]}
@@ -156,6 +169,7 @@ export default function Events() {
   );
 }
 
+{/* Styles for the components on the page */}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
