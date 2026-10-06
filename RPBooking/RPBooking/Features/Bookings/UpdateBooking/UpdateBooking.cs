@@ -1,6 +1,6 @@
 ﻿namespace RPBooking.Features.Bookings.UpdateBooking
 {
-    public class UpdateBooking
+    public static class UpdateBooking
     {
     }
 }
