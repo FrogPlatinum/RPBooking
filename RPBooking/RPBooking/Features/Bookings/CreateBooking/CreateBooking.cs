@@ -38,7 +38,7 @@ namespace RPBooking.Features.Bookings.CreateBooking
         //Endpoint
         public static void MapCreateBookingEndpoint(this IEndpointRouteBuilder app)
         {
-            app.MapPost("api/Bookings", async (Command command, IMediator mediator) =>
+            app.MapPost("api/bookings", async (Command command, IMediator mediator) =>
             {
                 int bookingId = await mediator.Send(command);
                 return Results.Created($"/api/bookings/{bookingId}", new { Id = bookingId });

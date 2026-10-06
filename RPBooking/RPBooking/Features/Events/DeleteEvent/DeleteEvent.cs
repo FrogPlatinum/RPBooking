@@ -34,7 +34,7 @@ namespace RPBooking.Features.Events.DeleteEvent
         //Endpoint
         public static void MapDeleteEventEndpoint(this IEndpointRouteBuilder app)
         {
-            app.MapDelete("api/remove/{id:int}", async (int id, IMediator mediator) =>
+            app.MapDelete("api/event/{id:int}", async (int id, IMediator mediator) =>
             {
                 var response = await mediator.Send(new Command(id));
 
