@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 
 // This is taken from "https://reactnative.dev/docs/network"! I redid it to get events from our backend :)
-type Event= {
+export type Event= {
   id: number;
   title: string;
   description: string;
@@ -21,7 +21,7 @@ type EventResponse = {
   events: Event[];
 };
 
-const App = () => {
+export const App = () => {
   const [isLoading, setLoading] = useState(true); //From example. My guess is that it starts the loading icon when you render the site and stops when it's sucessfully loaded the data.
   const [data, setData] = useState<Event[]>([]);
 
