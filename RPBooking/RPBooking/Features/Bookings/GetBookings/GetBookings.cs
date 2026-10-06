@@ -18,7 +18,7 @@ namespace RPBooking.Features.Bookings.GetBookings
             );
 
         //Respone
-        public record Response(List<BookingDto> bookings);
+        public record Response(List<BookingDto> Bookings);
 
         //Query
         public record Query() : IRequest<Response>;

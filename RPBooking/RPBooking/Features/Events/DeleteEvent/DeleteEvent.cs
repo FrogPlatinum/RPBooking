@@ -36,11 +36,9 @@ namespace RPBooking.Features.Events.DeleteEvent
         {
             app.MapDelete("api/events/{id:int}", async (int id, IMediator mediator) =>
             {
-                var response = await mediator.Send(new Command(id));
+                await mediator.Send(new Command(id));
 
-                return response
-                ? Results.NoContent()
-                : Results.NotFound(new { Message = $"Eventet med ID {id} findes ikke" });
+                return Results.NoContent();
             });
         }
     }
