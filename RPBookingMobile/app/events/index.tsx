@@ -23,8 +23,18 @@ type EventItem = {
 };
 
 {/* Lists for mapping status and type values to their string representations */}
-const eventStatuses = ["Cancelled", "Completed", "Scheduled", "Full"];
 const eventTypes = ["TabletopRP", "LiveRP"];
+
+// Translates the backend's type names into Danish.
+const eventTypeNames: Record<string, string> = {
+  TabletopRP: "Bordrollespil",
+  LiveRP: "Liverollespil",
+};
+
+const typeLabel = (value: number | string) =>
+  typeof value === "number"
+    ? eventTypeNames[eventTypes[value]] ?? String(value)
+    : eventTypeNames[value] ?? value;
 
 {/* Maps a value to its corresponding string representation */}
 const label = (value: number | string, list: string[]) =>
@@ -146,14 +156,7 @@ export default function Events() {
 
               <View style={styles.row}>
                 <Text style={styles.label}>Type</Text>
-                <Text style={styles.value}>{label(item.type, eventTypes)}</Text>
-              </View>
-
-              <View style={styles.row}>
-                <Text style={styles.label}>Status</Text>
-                <Text style={styles.value}>
-                  {label(item.status, eventStatuses)}
-                </Text>
+                <Text style={styles.value}>{typeLabel(item.type)}</Text>
               </View>
 
               <View style={styles.row}>
