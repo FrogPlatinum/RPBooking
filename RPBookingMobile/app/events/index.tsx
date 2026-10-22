@@ -1,6 +1,8 @@
 import { FlatList, Image, ActivityIndicator, Pressable, StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
 {/* The address of our backend API */}
 const API_URL = "http://10.0.2.2:5000/api/events";
@@ -21,8 +23,18 @@ type EventItem = {
 };
 
 {/* Lists for mapping status and type values to their string representations */}
-const eventStatuses = ["Cancelled", "Completed", "Scheduled", "Full"];
 const eventTypes = ["TabletopRP", "LiveRP"];
+
+// Translates the backend's type names into Danish.
+const eventTypeNames: Record<string, string> = {
+  TabletopRP: "Bordrollespil",
+  LiveRP: "Liverollespil",
+};
+
+const typeLabel = (value: number | string) =>
+  typeof value === "number"
+    ? eventTypeNames[eventTypes[value]] ?? String(value)
+    : eventTypeNames[value] ?? value;
 
 {/* Maps a value to its corresponding string representation */}
 const label = (value: number | string, list: string[]) =>
@@ -43,12 +55,13 @@ const formatTime = (iso: string) =>
     minute: "2-digit",
   });
 
-{/* Main component function. Event page with list of events, loading, refresh and error*/}  
+{/* Main component function. Event page with list of events, loading, refresh, error and tools to move between pages */}  
 export default function Events() {
   const [events, setEvents] = useState<EventItem[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [isRefreshing, setRefreshing] = useState(false);
   const [error, setError] = useState("");
+  const router = useRouter();
 
 {/* Fetches events from the backend API, saves if successful, error if not */}  
   const getEvents = useCallback(async () => {
@@ -105,11 +118,20 @@ export default function Events() {
             getEvents();
           }}
           ListHeaderComponent={
+              <View style={styles.header}>
+                <Pressable
+                style={styles.backButton} 
+                onPress={() => router.back()}
+                hitSlop={12}
+                >
+                  <Ionicons name="arrow-back" size={24} color="#5a4a1f" />
+                </Pressable>
               <Image
                source={require("../../assets/images/TempIcon.png")}
                style={styles.logo}
                resizeMode="contain"
              /> 
+             </View>
           }
           ListEmptyComponent={
             error === "" ? (
@@ -134,14 +156,7 @@ export default function Events() {
 
               <View style={styles.row}>
                 <Text style={styles.label}>Type</Text>
-                <Text style={styles.value}>{label(item.type, eventTypes)}</Text>
-              </View>
-
-              <View style={styles.row}>
-                <Text style={styles.label}>Status</Text>
-                <Text style={styles.value}>
-                  {label(item.status, eventStatuses)}
-                </Text>
+                <Text style={styles.value}>{typeLabel(item.type)}</Text>
               </View>
 
               <View style={styles.row}>
@@ -235,10 +250,18 @@ const styles = StyleSheet.create({
     color: "#333",
     fontSize: 14,
   },
+  header: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  backButton: {
+    position: "absolute",
+    left: 0,
+    zIndex: 1,
+  },
   logo: {
     width: 100,
     height: 100,
-    alignSelf: "center",
-    marginBottom: 16,
   },
 });
