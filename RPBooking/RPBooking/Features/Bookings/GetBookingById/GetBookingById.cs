@@ -51,7 +51,7 @@ namespace RPBooking.Features.Bookings.GetBookingById
         }
 
         //Endpoint
-        public static void MapGetBookingById(this IEndpointRouteBuilder app)
+        public static void MapGetBookingByIdEndpoint(this IEndpointRouteBuilder app)
         {
             app.MapGet("api/booking/{id:int}", async (int id, IMediator mediator) =>
             {
