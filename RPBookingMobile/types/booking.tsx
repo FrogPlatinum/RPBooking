@@ -8,3 +8,11 @@ export type Booking= {
   participantCount: number;
   participants: Participant[];
 };
+
+export type CreateBooking= {
+  contactName: string;
+  contactEmail: string;
+  phoneNumber: string;
+  participantCount: number;
+  participants: Omit<Participant, "id">[];
+};

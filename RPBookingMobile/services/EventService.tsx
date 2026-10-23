@@ -1,13 +1,13 @@
 
-import { Event } from '../types/Event';
+import { Event, CreateEvent } from '../types/event';
 
-const API_URL = "http://10.0.2.2:5000";
+const API_URL = "http://10.0.2.2:5000"; //for it to work on phone using our current setup, use your local IP4
  
 // Get Events
 export async function getEvents(): Promise<Event[]> {
   const response = await fetch(`${API_URL}/api/events`, {
     method: "GET",
-    headers: { Accept: "application/json" },
+    headers: { Accept: "application/json" }, 
   });
  
   if (!response.ok) {
@@ -15,13 +15,13 @@ export async function getEvents(): Promise<Event[]> {
   }
  
   const json = await response.json();
-  return Array.isArray(json) ? json : json.events;
+  return json.events;
 }
 
 // Get by ID
 // Might not be necessary, if we just "filter" by Id with the first `function`?
-export async function getEventById(): Promise<Event[]> {
-  const response = await fetch(`${API_URL}/api/events/{id}`, {
+export async function getEventById(id: number): Promise<Event> {
+  const response = await fetch(`${API_URL}/api/events/${id}`, {
     method: "GET",
     headers: { Accept: "application/json" },
   });
@@ -30,55 +30,57 @@ export async function getEventById(): Promise<Event[]> {
     throw new Error(`Serveren svarede med status ${response.status}`);
   }
  
-  const json = await response.json();
-  return Array.isArray(json) ? json : json.events;//This might need to change?
+ return response.json();
 }
 
 // Create Event
-export async function createEvent(): Promise<Event[]> {
+export async function createEvent(event: CreateEvent): Promise<void> {
   const response = await fetch(`${API_URL}/api/events`, {
     method: "POST",
-    headers: { Accept: "application/json" },
+    body: JSON.stringify(event),
+    // We only need the header "Content-Type", since we're only sending data and recieving status codes.
+    headers: { 
+       "Content-Type": "application/json"
+     },
   });
  
   if (!response.ok) {
     throw new Error(`Serveren svarede med status ${response.status}`);
   }
- 
-  const json = await response.json();
-  return Array.isArray(json) ? json : json.events;//This might need to change?
 }
 
 //Edit Event
-//export async function editEvent(): Promise<Event[]> {
-export async function editEvent(){
-  const response = await fetch(`${API_URL}/api/events/{id}`, {
+// I use "Partial<Event>", since it enables it to send only the changed elements.
+export async function editEvent(id: number, event: Partial<CreateEvent>): Promise<void>{
+  
+  const response = await fetch(`${API_URL}/api/events/${id}`, {
+   
     method: "PATCH",
-    headers: { Accept: "application/json" },
+    body: JSON.stringify(event),
+    // We only need the header "Content-Type", since we're only sending data and recieving status codes.
+    headers: { 
+      "Content-Type": "application/json",
+    },
   });
  
   if (!response.ok) {
     throw new Error(`Serveren svarede med status ${response.status}`);
   }
- 
-  const json = await response.json();
-  //return Array.isArray(json) ? json : json.events;//This might need to change?
+  
 }
 
 //Delete Event
-//export async function deleteEvent(): Promise<Event[]> {
-export async function deleteEvent(){
-  const response = await fetch(`${API_URL}/api/events/{id}`, {
-    method: "DEL",
-    headers: { Accept: "application/json" },
+
+export async function deleteEvent(id: number): Promise<void> {
+  const response = await fetch(`${API_URL}/api/events/${id}`, {
+    method: "DELETE",
+   // We don't need headers, since we're not sending or recieving data.
   });
  
   if (!response.ok) {
     throw new Error(`Serveren svarede med status ${response.status}`);
   }
  
-  const json = await response.json();
-  //return Array.isArray(json) ? json : json.events;
 }
 
 //Future filtering example:
