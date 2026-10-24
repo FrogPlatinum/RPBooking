@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using MediatR;
+using RPBooking.Exceptions;
 using RPBooking.Infrastructure.Persistence;
 
 namespace RPBooking.Features.Events.DeleteEvent
@@ -20,7 +21,7 @@ namespace RPBooking.Features.Events.DeleteEvent
                 //Handle if not found
                 if (eventToDelete == null)
                 {
-                    return false;
+                    throw new NotFoundException();
                 }
 
                 //Remove and save

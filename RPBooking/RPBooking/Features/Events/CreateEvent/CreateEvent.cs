@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using RPBooking.Exceptions;
 using RPBooking.Infrastructure.Persistence;
 using static RPBooking.Features.Events.Event;
 
@@ -42,6 +43,12 @@ namespace RPBooking.Features.Events.CreateEvent
                 context.Events.Add( newEvent );
 
                 await context.SaveChangesAsync(cancellationToken);
+
+                //Exception Handling
+                if(newEvent == null)
+                {
+                    throw new UnprocessableEntityException();
+                }
 
                 return newEvent.Id;
             }

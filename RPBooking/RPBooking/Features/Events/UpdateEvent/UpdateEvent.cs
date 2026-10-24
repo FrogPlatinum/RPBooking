@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Identity.Client;
+using RPBooking.Exceptions;
 using RPBooking.Infrastructure.Persistence;
 using static RPBooking.Features.Events.Event;
 
@@ -47,7 +48,7 @@ namespace RPBooking.Features.Events.UpdateEvent
                 //Handle if not found
                 if (eventToUpdate == null)
                 {
-                    return false;
+                    throw new NotFoundException();
                 }
 
                 //Update

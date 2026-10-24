@@ -17,6 +17,7 @@ namespace RPBooking.Features.Bookings.DeleteBooking
                 //Find
                 var bookingToDelete = await context.Bookings.FindAsync([request.id, cancellationToken]);
 
+                //Handle if not found
                 if(bookingToDelete == null)
                 {
                     throw new NotFoundException();
