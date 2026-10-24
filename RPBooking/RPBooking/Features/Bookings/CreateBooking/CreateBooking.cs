@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
+using RPBooking.Exceptions;
 using RPBooking.Infrastructure.Persistence;
 
 namespace RPBooking.Features.Bookings.CreateBooking
@@ -30,6 +32,11 @@ namespace RPBooking.Features.Bookings.CreateBooking
 
                 context.Bookings.Add( newBooking );
                 await context.SaveChangesAsync(cancellationToken);
+
+                if(newBooking == null)
+                {
+                    throw new UnprocessableEntityException();
+                }
 
                 return newBooking.Id;
             }

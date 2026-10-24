@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using RPBooking.Exceptions;
 using RPBooking.Infrastructure.Persistence;
 
 namespace RPBooking.Features.Bookings.GetBookings
@@ -43,6 +44,11 @@ namespace RPBooking.Features.Bookings.GetBookings
                     b.Participants,
                     b.Note
                     )).ToListAsync(cancellationToken);
+
+                if(bookingDtos == null)
+                {
+                    throw new NotFoundException();
+                }
 
                 return new Response(bookingDtos);
             }

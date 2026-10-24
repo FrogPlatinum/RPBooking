@@ -37,13 +37,13 @@ namespace RPBooking.Exceptions
                     "Requested resource does not exist."
                 ),
                 //409
-                ConflictException =>(
+                ConflictException => (
                     StatusCodes.Status409Conflict,
                     "Conflict",
                     "Resource already exists, or is not in a viable state."
                 ),
                 //422
-                UnprocessableEntityException =>(
+                UnprocessableEntityException => (
                     StatusCodes.Status422UnprocessableEntity,
                     "Unprocessable Entity",
                     "Validation failed"

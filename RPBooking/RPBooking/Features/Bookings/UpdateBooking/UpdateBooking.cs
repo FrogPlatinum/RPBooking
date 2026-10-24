@@ -34,7 +34,7 @@ namespace RPBooking.Features.Bookings.UpdateBooking
                 //Handle if not found
                 if (bookingToUpdate == null)
                 {
-                    return false;
+                    throw new NotFoundException();
                 }
                 //Update
                 if (request.ContactName != null)
