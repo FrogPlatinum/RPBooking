@@ -141,11 +141,18 @@ export default function Events() {
             ) 
           }
           renderItem={({ item }) => (
-            <Pressable style={styles.card}>
-              <Text style={styles.title}>{item.title}</Text>
-              {!!item.description && (
-                <Text style={styles.description}>{item.description}</Text>
-              )}
+            <Pressable
+  style={styles.card}
+  onPress={() =>
+    router.push({
+      pathname: "/events/fulleventdescription",
+      params: { id: String(item.id) },
+    })
+  }
+>
+
+{/* Event details: title, date, type, price, age restriction, participants, description */}
+<Text style={styles.title}>{item.title}</Text>
 
               <View style={styles.row}>
                 <Text style={styles.label}>Dato</Text>
@@ -176,6 +183,12 @@ export default function Events() {
                   {item.privateEvent ? " (privat)" : ""}
                 </Text>
               </View>
+
+              {!!item.description && (
+                <Text style={styles.description} numberOfLines={2}>
+                  {item.description}
+                </Text>
+              )}
             </Pressable>
           )}
         />
@@ -234,7 +247,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     color: "#333",
-    marginBottom: 10,
+    marginTop: 10,
   },
   row: {
     flexDirection: "row",
