@@ -3,6 +3,7 @@
     public class Booking
     {
         public int Id { get; set; }
+        public int EventId { get; set; }
         public string ContactName { get; set; } = string.Empty;
         public string ContactEmail { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;

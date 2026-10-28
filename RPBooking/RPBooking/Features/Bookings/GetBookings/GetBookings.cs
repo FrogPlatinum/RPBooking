@@ -10,6 +10,7 @@ namespace RPBooking.Features.Bookings.GetBookings
         //DTO
         public record BookingDto(
             int Id,
+            int EventId,
             string ContactName,
             string ContactEmail,
             string PhoneNumber,
@@ -37,6 +38,7 @@ namespace RPBooking.Features.Bookings.GetBookings
                     .AsNoTracking()
                     .Select(b => new BookingDto(
                     b.Id,
+                    b.EventId,
                     b.ContactName,
                     b.ContactEmail,
                     b.PhoneNumber,

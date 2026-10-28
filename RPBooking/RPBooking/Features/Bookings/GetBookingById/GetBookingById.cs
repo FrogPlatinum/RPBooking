@@ -10,6 +10,7 @@ namespace RPBooking.Features.Bookings.GetBookingById
         //Response DTO
         public record Response(
             int Id,
+            int EventId,
             string ContactName,
             string ContactEmail,
             string PhoneNumber,
@@ -32,6 +33,7 @@ namespace RPBooking.Features.Bookings.GetBookingById
                     .Select(b =>
                     new Response(
                         b.Id,
+                        b.EventId,
                         b.ContactName,
                         b.ContactEmail,
                         b.PhoneNumber,

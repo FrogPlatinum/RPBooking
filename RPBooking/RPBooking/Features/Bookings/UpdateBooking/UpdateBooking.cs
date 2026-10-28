@@ -8,6 +8,7 @@ namespace RPBooking.Features.Bookings.UpdateBooking
     {
         //Request DTO
         public record UpdateBookingRequest(
+            string? EventId = null,
             string? ContactName = null,
             string? ContactEmail = null,
             string? PhoneNumber = null,
@@ -18,7 +19,8 @@ namespace RPBooking.Features.Bookings.UpdateBooking
         //Command
         public record Command(
             int Id,
-            string? ContactName,
+            string? EventId,
+            string? ContactName,            
             string? ContactEmail,
             string? PhoneNumber,
             List<Participant>? Participants,
@@ -68,6 +70,7 @@ namespace RPBooking.Features.Bookings.UpdateBooking
             {
                 var command = new Command(
                     id,
+                    request.EventId,
                     request.ContactName,
                     request.ContactEmail,
                     request.PhoneNumber,
