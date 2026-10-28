@@ -145,7 +145,7 @@ export default function Events() {
   style={styles.card}
   onPress={() =>
     router.push({
-      pathname: "/events/fulleventdescription",
+      pathname: "../events/fulleventdescription",
       params: { id: String(item.id) },
     })
   }
