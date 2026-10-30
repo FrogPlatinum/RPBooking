@@ -38,7 +38,7 @@ namespace RPBooking.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EventId")
+                    b.Property<int>("EventId")
                         .HasColumnType("int");
 
                     b.Property<string>("Note")
@@ -132,7 +132,8 @@ namespace RPBooking.Migrations
                     b.HasOne("RPBooking.Features.Events.Event", null)
                         .WithMany("Bookings")
                         .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("RPBooking.Features.Bookings.Participant", b =>
