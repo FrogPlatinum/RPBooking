@@ -7,7 +7,6 @@
     "icon": "./assets/images/TempIcon.png",
     "scheme": "rpbookingmobile",
     "userInterfaceStyle": "automatic",
-    //"newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
@@ -18,8 +17,8 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      //"edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.noellerud.RPBookingMobile"
     },
     "web": {
       "output": "server",
@@ -28,11 +27,8 @@
     "plugins": [
       [
         "expo-router",
-        {
-         // "origin": "https://"
-        }
+        {}
       ],
-      
       [
         "expo-splash-screen",
         {
