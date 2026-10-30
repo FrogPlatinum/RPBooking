@@ -1,26 +1,28 @@
-import { FlatList, Image, ActivityIndicator, Pressable, StyleSheet, Text, View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "expo-router";
+import { getEvents as fetchEvents } from "@/services/eventService";
+import { Event as EventItem } from "@/types/event";
 import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
+import { useCallback, useEffect, useState } from "react";
+import { ActivityIndicator, FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 {/* The address of our backend API */}
-const API_URL = "http://10.0.2.2:5000/api/events";
+// const API_URL = "http://10.0.2.2:5224/api/events";
 
 {/* Type definition for each event item */}
-type EventItem = {
-  id: number;
-  title: string;
-  description: string;
-  date: string;
-  ageRes: number;
-  price: number;
-  minParticipant: number;
-  maxParticipant: number;
-  privateEvent: boolean;
-  status: number | string;
-  type: number | string;
-};
+// type EventItem = {
+//   id: number;
+//   title: string;
+//   description: string;
+//   date: string;
+//   ageRes: number;
+//   price: number;
+//   minParticipant: number;
+//   maxParticipant: number;
+//   privateEvent: boolean;
+//   status: number | string;
+//   type: number | string;
+// };
 
 {/* Lists for mapping status and type values to their string representations */}
 const eventTypes = ["TabletopRP", "LiveRP"];
@@ -67,15 +69,8 @@ export default function Events() {
   const getEvents = useCallback(async () => {
     try {
       setError("");
-      const response = await fetch(API_URL, {
-        method: "GET",
-        headers: { Accept: "application/json" },
-      });
-      if (!response.ok) {
-        throw new Error(`Serveren svarede med status ${response.status}`);
-      }
-      const json = await response.json();
-      setEvents(Array.isArray(json) ? json : json.events ?? []);
+      const data = await fetchEvents();
+      setEvents(data);
     } catch (e) {
       console.error("Request failed:", e);
       setError("Kunne ikke hente events :(");
@@ -85,9 +80,12 @@ export default function Events() {
     }
   }, []);
 
+
+
   {/* Runs getEvents when the page opens */}
   useEffect(() => {
     getEvents();
+    
   }, [getEvents]);
 
   {/* What the page shows on the screen */}

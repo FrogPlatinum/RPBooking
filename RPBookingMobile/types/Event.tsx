@@ -7,9 +7,9 @@ export type Event= {
   price: number;
   minParticipant: number;
   maxParticipant: number;
-  privateEvent: number;
-  status: string;
-  type: string;
+  privateEvent: boolean;
+  status: string | number;
+  type: string | number;
 
 };
 
@@ -22,7 +22,7 @@ export type CreateEvent= {
   price: number;
   minParticipant: number;
   maxParticipant: number;
-  privateEvent: number;
-  status: string;
-  type: string;
+  privateEvent: boolean;
+  status: string | number;
+  type: string | number;
 };
