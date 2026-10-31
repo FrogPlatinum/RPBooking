@@ -9,6 +9,7 @@ namespace RPBooking.Features.Bookings.CreateBooking
     {
         //Command
         public record Command(
+            int EventId,
             string ContactName,
             string ContactEmail,
             string PhoneNumber,
@@ -23,6 +24,7 @@ namespace RPBooking.Features.Bookings.CreateBooking
             {
                 var newBooking = new Booking
                 {
+                    EventId = request.EventId,
                     ContactName = request.ContactName,
                     ContactEmail = request.ContactEmail,
                     PhoneNumber = request.PhoneNumber,

@@ -1,8 +1,12 @@
 import { Link } from "expo-router";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { GridButton } from "../components/GoToEventButton";
+import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 /* importing all functions used in Index. Remember to install expo-linear-gradient */
+
 export default function Index() {
+  const router = useRouter();
 
   {/* background gradient */}
   {/* logo shown on the front page */}
@@ -21,12 +25,8 @@ export default function Index() {
         />
 
     <View style={styles.buttonContainer}>
-      <Link href="/events" asChild>
-      <Pressable style={styles.button}>
-        <Text style={styles.buttonText}>Se Events</Text>
-        </Pressable>
-        </Link>
-    </View>
+    <GridButton title="Se Events" onPress={() => router.push("/events")} />
+  </View>
     </LinearGradient>
   );
 }
