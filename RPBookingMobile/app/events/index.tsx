@@ -1,8 +1,9 @@
 import { FlatList, Image, ActivityIndicator, Pressable, StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+
 
 {/* The address of our backend API */}
 const API_URL = "http://10.0.2.2:5000/api/events";
@@ -85,10 +86,12 @@ export default function Events() {
     }
   }, []);
 
-  {/* Runs getEvents when the page opens */}
-  useEffect(() => {
+ {/* Runs getEvents every time the page is shown, also when coming back from another page */}
+useFocusEffect(
+  useCallback(() => {
     getEvents();
-  }, [getEvents]);
+  }, [getEvents])
+);
 
   {/* What the page shows on the screen */}
   {/* LinearGradient = Background gradient */}
