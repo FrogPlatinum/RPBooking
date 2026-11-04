@@ -34,7 +34,10 @@ namespace RPBooking.Features.Events.GetEvents
             {
                 //Change this to linq too, like booking??
                 //Fetch from DB
-                var eventsFromDb = await context.Events.AsNoTracking().ToListAsync(cancellationToken);
+                var eventsFromDb = await context.Events
+                    .AsNoTracking()
+                    .OrderBy(e => e.Date)
+                    .ToListAsync(cancellationToken);
 
                 //Mapping Entity to DTO
                 var eventDtos = eventsFromDb.Select(e => new EventDto(

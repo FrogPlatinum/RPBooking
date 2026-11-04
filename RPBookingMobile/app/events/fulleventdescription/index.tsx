@@ -1,26 +1,28 @@
-import { ActivityIndicator, Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { useCallback, useEffect, useState } from "react";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { getEventById } from "@/services/eventService";
+import { Event as EventItem } from "@/types/event";
 import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useCallback, useEffect, useState } from "react";
+import { ActivityIndicator, Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 {/* The address of our backend API */}
-const API_URL = "http://10.0.2.2:5000/api/events";
+// const API_URL = "http://10.0.2.2:5000/api/events";
 
 {/* Type definition for an event */}
-type EventItem = {
-  id: number;
-  title: string;
-  description: string;
-  date: string;
-  ageRes: number;
-  price: number;
-  minParticipant: number;
-  maxParticipant: number;
-  privateEvent: boolean;
-  status: number | string;
-  type: number | string;
-};
+// type EventItem = {
+//   id: number;
+//   title: string;
+//   description: string;
+//   date: string;
+//   ageRes: number;
+//   price: number;
+//   minParticipant: number;
+//   maxParticipant: number;
+//   privateEvent: boolean;
+//   status: number | string;
+//   type: number | string;
+// };
 
 {/* The backend's event types and their Danish names */}
 const eventTypes = ["TabletopRP", "LiveRP"];
@@ -62,14 +64,9 @@ export default function FullEventDescription() {
   const getEvent = useCallback(async () => {
     try {
       setError("");
-      const response = await fetch(`${API_URL}/${id}`, {
-        method: "GET",
-        headers: { Accept: "application/json" },
-      });
-      if (!response.ok) {
-        throw new Error(`Serveren svarede med status ${response.status}`);
-      }
-      setEvent(await response.json());
+  
+      const data = await getEventById(Number(id));
+      setEvent(data);
     } catch (e) {
       console.error("Request failed:", e);
       setError("Kunne ikke hente eventet :(");
