@@ -33,6 +33,7 @@ namespace RPBooking.Features.Bookings.UpdateBooking
             {
                 //Find
                 var bookingToUpdate = await context.Bookings.FindAsync([request.Id], cancellationToken);
+                
                 //Handle if not found
                 if (bookingToUpdate == null)
                 {

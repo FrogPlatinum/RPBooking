@@ -32,13 +32,13 @@ namespace RPBooking.Features.Bookings.CreateBooking
                     Note = request.Note
                 };
 
-                context.Bookings.Add( newBooking );
-                await context.SaveChangesAsync(cancellationToken);
-
-                if(newBooking == null)
+                if (newBooking == null)
                 {
                     throw new UnprocessableEntityException();
                 }
+
+                context.Bookings.Add( newBooking );
+                await context.SaveChangesAsync(cancellationToken);
 
                 return newBooking.Id;
             }
