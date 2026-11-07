@@ -13,6 +13,8 @@ namespace RPBooking.Features.Events.UpdateEvent
             string? Title = null,
             string? Description = null,
             DateTime? Date = null,
+            string? Address = null,
+            string? Town = null,
             int? AgeRes = null,
             double? Price = null,
             int? MinParticipant = null,
@@ -28,6 +30,8 @@ namespace RPBooking.Features.Events.UpdateEvent
             string? Title,
             string? Description,
             DateTime? Date,
+            string? Address,
+            string? City,
             int? AgeRes,
             double? Price,
             int? MinParticipant,
@@ -63,6 +67,14 @@ namespace RPBooking.Features.Events.UpdateEvent
                 if (request.Date.HasValue)
                 {
                     eventToUpdate.Date = request.Date.Value;
+                }
+                if (request.Address != null)
+                {
+                    eventToUpdate.Address = request.Address;
+                }
+                if (request.City != null)
+                {
+                    eventToUpdate.City = request.City;
                 }
                 if (request.AgeRes.HasValue)
                 {
@@ -110,6 +122,8 @@ namespace RPBooking.Features.Events.UpdateEvent
                     request.Title,
                     request.Description,
                     request.Date,
+                    request.Address,
+                    request.Town,
                     request.AgeRes,
                     request.Price,
                     request.MinParticipant,

@@ -36,6 +36,8 @@ namespace UnitTests.Events
                     Title = "Call of Cthulhu Session",
                     Description = "Horror tabletop night",
                     Date = DateTime.UtcNow.AddDays(7),
+                    Address = "Test Street 32",
+                    City = "Odense",
                     AgeRes = 16,
                     Price = 50,
                     MinParticipant = 3,
