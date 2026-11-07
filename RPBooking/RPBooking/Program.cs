@@ -35,16 +35,6 @@ namespace RPBooking
 
             var app = builder.Build();
 
-            //move test to Endpointextension
-            app.MapGet("/api/test", () => Results.Ok(new
-            {
-                Status = "Online",
-                Message = "Hello :)",
-                Timestamp = DateTime.Now,
-            }));
-
-
-
             //Endpoints
             app.MapEventFeatureEndpoints();
             app.MapBookingFeatureEndpoints();
