@@ -3,9 +3,11 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { createEvent as postEvent } from "@/services/EventService";
+import { CreateEvent } from "@/types/event";
 
-{/* The address of our backend API */}
-const API_URL = "http://10.0.2.2:5000/api/events";
+//{/* The address of our backend API */}
+//const API_URL = "http://10.0.2.2:5000/api/events";
 
 {/* Danish names in the same order as the backend's enums (the index is the number we send) */}
 const statusOptions = ["Aflyst", "Afsluttet", "Planlagt", "Fuldt booket"]; // Cancelled, Completed, Scheduled, Full
@@ -71,45 +73,38 @@ const parseDate = (text: string) => {
 
   {/* Sends the new event to the backend with POST, and goes back to the list if it succeeds */}
   const createEvent = async () => {
-    const problem = validate();
-    if (problem) {
-      setError(problem);
-      return;
-    }
+  const problem = validate();
+  if (problem) {
+    setError(problem);
+    return;
+  }
 
-    try {
-      setSaving(true);
-      setError("");
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: title.trim(),
-          description: description.trim(),
-          date: `${parseDate(date)}T${time}:00`,
-          ageRes: toNumber(ageRes),
-          price: toNumber(price),
-          minParticipant: toNumber(minParticipant),
-          maxParticipant: toNumber(maxParticipant),
-          privateEvent,
-          status,
-          type,
-        }),
-      });
-      if (!response.ok) {
-        throw new Error(`Serveren svarede med status ${response.status}`);
-      }
-      router.back();
-    } catch (e) {
-      console.error("Request failed:", e);
-      setError("Kunne ikke oprette eventet :(");
-    } finally {
-      setSaving(false);
-    }
+    {/* The new event, built from the form fields */}
+  const newEvent: CreateEvent = {
+    title: title.trim(),
+    description: description.trim(),
+    date: `${parseDate(date)}T${time}:00`,
+    ageRes: toNumber(ageRes),
+    price: toNumber(price),
+    minParticipant: toNumber(minParticipant),
+    maxParticipant: toNumber(maxParticipant),
+    privateEvent,
+    status,
+    type,
   };
+
+  try {
+    setSaving(true);
+    setError("");
+    await postEvent(newEvent);
+    router.back();
+  } catch (e) {
+    console.error("Request failed:", e);
+    setError("Kunne ikke oprette eventet :(");
+  } finally {
+    setSaving(false);
+  }
+};
 
   {/* What the page shows on the screen */}
   {/* KeyboardAvoidingView + ScrollView = the keyboard does not cover the fields */}
