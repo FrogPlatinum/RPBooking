@@ -1,4 +1,4 @@
-import { getEventById } from "@/services/EventService";
+import { getEventById } from "@/services/eventService";
 import { Event as EventItem } from "@/types/event";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";

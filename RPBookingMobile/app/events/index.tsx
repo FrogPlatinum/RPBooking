@@ -1,4 +1,4 @@
-import { getEvents as fetchEvents } from "@/services/EventService";
+import { getEvents as fetchEvents } from "@/services/eventService";
 import { Event as EventItem } from "@/types/event";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
@@ -129,7 +129,7 @@ useFocusEffect(
                 {/* Button that opens the page for adding a new event */}
     <Pressable
       style={styles.addButton}
-      onPress={() => router.push("/events/createevent")}
+      onPress={() => router.push("/events/createevent/index")}
       hitSlop={12}
     >
       <Ionicons name="add" size={28} color="#5a4a1f" />
@@ -292,7 +292,6 @@ const styles = StyleSheet.create({
   logo: {
     width: 100,
     height: 100,
-    borderWidth: 2,
-  borderColor: "#391b64",
+    
   },
 });

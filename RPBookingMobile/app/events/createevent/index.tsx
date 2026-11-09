@@ -3,7 +3,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { createEvent as postEvent } from "@/services/EventService";
+import { createEvent as postEvent } from "@/services/eventService";
 import { CreateEvent } from "@/types/event";
 
 //{/* The address of our backend API */}
