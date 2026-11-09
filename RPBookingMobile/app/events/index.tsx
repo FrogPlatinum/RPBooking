@@ -1,9 +1,9 @@
-import { getEvents as fetchEvents } from "@/services/eventService";
+import { getEvents as fetchEvents } from "@/services/EventService";
 import { Event as EventItem } from "@/types/event";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { useRouter } from "expo-router";
-import { useCallback, useEffect, useState } from "react";
+import { useRouter, useFocusEffect } from "expo-router";
+import { useCallback, useState } from "react";
 import { ActivityIndicator, FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 {/* The address of our backend API */}
@@ -82,11 +82,12 @@ export default function Events() {
 
 
 
-  {/* Runs getEvents when the page opens */}
-  useEffect(() => {
+{/* Runs getEvents every time the page is shown, also when coming back from another page */}
+useFocusEffect(
+  useCallback(() => {
     getEvents();
-    
-  }, [getEvents]);
+  }, [getEvents])
+);
 
   {/* What the page shows on the screen */}
   {/* LinearGradient = Background gradient */}
@@ -124,6 +125,16 @@ export default function Events() {
                 >
                   <Ionicons name="arrow-back" size={24} color="#5a4a1f" />
                 </Pressable>
+
+                {/* Button that opens the page for adding a new event */}
+    <Pressable
+      style={styles.addButton}
+      onPress={() => router.push("/events/createevent")}
+      hitSlop={12}
+    >
+      <Ionicons name="add" size={28} color="#5a4a1f" />
+    </Pressable>
+
               <Image
                source={require("../../assets/images/TempIcon.png")}
                style={styles.logo}
@@ -270,7 +281,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 0,
     zIndex: 1,
+    color: "#391b64",
   },
+  addButton: {
+  position: "absolute",
+  right: 0,
+  zIndex: 1,
+  color: "#391b64",
+},
   logo: {
     width: 100,
     height: 100,
