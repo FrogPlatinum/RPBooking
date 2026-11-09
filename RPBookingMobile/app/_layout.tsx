@@ -5,7 +5,7 @@ export default function RootLayout() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" options={{ title: 'Home' }} />
       <Stack.Screen name="testgetapidata" options={{ title: 'TestSite' }} />
-      <Stack.Screen name="BackendConnectTest" options={{ title: 'BackendConnect' }} />
+      <Stack.Screen name="backendConnectTest" options={{ title: 'BackendConnect' }} />
       <Stack.Screen name="events/index" options={{ title: "Events" }} />
     </Stack>
   );
