@@ -1,7 +1,7 @@
 
 import { CreateEvent, Event } from '../types/event';
 
-const API_URL = "http://10.0.2.2:5224"; //for it to work on phone using our current setup, use your local IP4
+const API_URL = "http://10.0.2.2:5000"; //for it to work on phone using our current setup, use your local IP4
  
 // Get Events
 export async function getEvents(): Promise<Event[]> {
