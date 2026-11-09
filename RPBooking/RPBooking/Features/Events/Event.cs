@@ -8,6 +8,8 @@ namespace RPBooking.Features.Events
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public DateTime Date { get; set; }
+        public string Address { get; set; } = string.Empty;
+        public string City { get; set; } = string.Empty;
         public int AgeRes { get; set; }
         public double Price { get; set; }
         public int MinParticipant { get; set; }

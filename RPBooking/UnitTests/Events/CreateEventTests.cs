@@ -37,6 +37,8 @@ namespace UnitTests.Events
                 Title: "Call of Cthulhu",
                 Description: "Spooks and Horror",
                 Date: DateTime.UtcNow.AddDays(14),
+                Address:"Test Street 42",
+                City:"Odense",
                 AgeRes: 16,
                 Price: 199,
                 MinParticipant: 3,

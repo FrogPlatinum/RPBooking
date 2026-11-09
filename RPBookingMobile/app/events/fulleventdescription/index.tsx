@@ -1,4 +1,4 @@
-import { getEventById } from "@/services/eventService";
+import { getEventById } from "@/services/EventService";
 import { Event as EventItem } from "@/types/event";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
@@ -173,6 +173,9 @@ const styles = StyleSheet.create({
   logo: {
     width: 100,
     height: 100,
+    borderWidth: 2,
+  borderColor: "#391b64",
+  borderRadius: 50,
   },
   spinner: {
     marginTop: 40,
