@@ -249,9 +249,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: "600",
-    color: "#5a4a1f",
+    fontWeight: "800",
+    color: "#391b64",
     marginBottom: 6,
+    letterSpacing: 1,
   },
   description: {
     fontSize: 14,
@@ -264,7 +265,7 @@ const styles = StyleSheet.create({
   },
   label: {
     width: 80,
-    color: "#999",
+    color: "#333",
     fontSize: 14,
   },
   value: {
@@ -292,6 +293,8 @@ const styles = StyleSheet.create({
   logo: {
     width: 100,
     height: 100,
-    
+    borderWidth: 2,
+  borderColor: "#391b64",
+  borderRadius: 16,
   },
 });
