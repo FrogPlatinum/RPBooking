@@ -274,5 +274,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 100,
     height: 100,
+    borderWidth: 2,
+  borderColor: "#391b64",
   },
 });
