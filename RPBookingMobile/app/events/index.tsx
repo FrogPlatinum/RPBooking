@@ -129,7 +129,7 @@ useFocusEffect(
                 {/* Button that opens the page for adding a new event */}
     <Pressable
       style={styles.addButton}
-      onPress={() => router.push("/events/createevent/index")}
+      onPress={() => router.push("../events/createevent/index")}
       hitSlop={12}
     >
       <Ionicons name="add" size={28} color="#5a4a1f" />
