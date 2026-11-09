@@ -1,6 +1,6 @@
 import { Link } from "expo-router";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import { GridButton } from "../components/goToEventButton.tsx";
+import { GridButton } from "@/components/goToEventButton";
 import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 /* importing all functions used in Index. Remember to install expo-linear-gradient */
