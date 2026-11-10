@@ -15,7 +15,13 @@ export type Event= {
 
 };
 
+
 // Since we don't need or want ID when we create and event, I've made a seperate type for creating events. (Think of DTO)
+export type CreateEvent= Omit<Event, "id">;
+
+
+
+// Old way of doing it, without Omit:
 // export type CreateEvent= {
 //   title: string;
 //   description: string;
@@ -31,4 +37,3 @@ export type Event= {
 //   type: string | number;
 // };
 
-export type CreateEvent= Omit<Event, "id">;
