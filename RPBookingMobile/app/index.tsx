@@ -2,7 +2,7 @@ import { GridButton } from "@/components/goToEventButton";
 import { useAuthStore } from "@/utils/authStore";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, Button as StandardButton, StyleSheet, View } from "react-native";
 /* importing all functions used in Index. Remember to install expo-linear-gradient */
 
 export default function Index() {
@@ -29,7 +29,7 @@ export default function Index() {
         <GridButton title="Se Events" onPress={() => router.push("/events")} />
       </View>
       <View style={styles.container}>
-        <GridButton title="Log Ud" onPress={logOut} />
+        <StandardButton title="Log Ud" onPress={logOut} />
       </View>
     </View>
   

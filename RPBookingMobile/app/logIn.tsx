@@ -1,8 +1,7 @@
-import { GridButton } from "@/components/goToEventButton";
 import { useAuthStore } from "@/utils/authStore";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import { Image, StyleSheet, View } from "react-native";
+import { Button, Image, StyleSheet, View } from "react-native";
 /* importing all functions used in Index. Remember to install expo-linear-gradient */
 
 export default function Login() {
@@ -28,11 +27,11 @@ export default function Login() {
     <View style={styles.buttonContainer}>
 
          <View style={styles.container}>
-            <GridButton title="Log Ind" onPress={logIn} />
+            <Button title="Log Ind" onPress={logIn} />
         </View>
     
         <View style={styles.container}>
-            <GridButton title="Log Ind Som Admin" onPress={logInAsAdmin} />
+            <Button title="Log Ind Som Admin" onPress={logInAsAdmin} />
         </View>
     
   </View>

@@ -140,6 +140,7 @@ useFocusEffect(
     </Pressable>)
   }
 
+
               <Image
                source={require("../../assets/images/TempIcon.png")}
                style={styles.logo}
