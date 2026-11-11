@@ -2,7 +2,7 @@ import { getEvents as fetchEvents } from "@/services/eventService";
 import { Event as EventItem } from "@/types/event";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { useRouter, useFocusEffect } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import { ActivityIndicator, FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
 
@@ -129,7 +129,7 @@ useFocusEffect(
                 {/* Button that opens the page for adding a new event */}
     <Pressable
       style={styles.addButton}
-      onPress={() => router.push("../events/createevent/index")}
+      onPress={() => router.push("/events/createevent")}
       hitSlop={12}
     >
       <Ionicons name="add" size={28} color="#5a4a1f" />
