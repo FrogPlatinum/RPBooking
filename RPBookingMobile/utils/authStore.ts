@@ -18,9 +18,9 @@ type UserState = {
 export const useAuthStore = create(
     persist<UserState>((set) => ({
 
-    isLoggedIn: true,
+    isLoggedIn: false,
     hasCompletedSignUp: true,
-    isAdmin: true,
+    isAdmin: false,
 
     logIn: () => {
         set((state) => {

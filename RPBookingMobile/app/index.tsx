@@ -1,13 +1,13 @@
-import { Link } from "expo-router";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { GridButton } from "@/components/goToEventButton";
-import { useRouter } from "expo-router";
+import { useAuthStore } from "@/utils/authStore";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
+import { Image, StyleSheet, View } from "react-native";
 /* importing all functions used in Index. Remember to install expo-linear-gradient */
 
 export default function Index() {
   const router = useRouter();
-
+ const {logOut} = useAuthStore();
   {/* background gradient */}
   {/* logo shown on the front page */}
   {/* button shown on the front page that links to the events page */}
@@ -25,8 +25,14 @@ export default function Index() {
         />
 
     <View style={styles.buttonContainer}>
-    <GridButton title="Se Events" onPress={() => router.push("/events")} />
-  </View>
+      <View style={styles.container}> 
+        <GridButton title="Se Events" onPress={() => router.push("/events")} />
+      </View>
+      <View style={styles.container}>
+        <GridButton title="Log Ud" onPress={logOut} />
+      </View>
+    </View>
+  
     </LinearGradient>
   );
 }
