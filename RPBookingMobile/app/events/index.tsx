@@ -171,6 +171,11 @@ useFocusEffect(
               </View>
 
               <View style={styles.row}>
+                <Text style={styles.label}>Sted</Text>
+                <Text style={styles.value}>{item.city}</Text>
+              </View>
+
+              <View style={styles.row}>
                 <Text style={styles.label}>Type</Text>
                 <Text style={styles.value}>{typeLabel(item.type)}</Text>
               </View>
