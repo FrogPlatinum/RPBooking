@@ -29,7 +29,7 @@ export default function CreateEventPage() {
   const [minParticipant, setMinParticipant] = useState("");
   const [maxParticipant, setMaxParticipant] = useState("");
   const [address, setAddress] = useState("");
-const [city, setCity] = useState("");
+  const [city, setCity] = useState("");
   const [privateEvent, setPrivateEvent] = useState(false);
   const [status, setStatus] = useState(2); // "Planlagt" as default for a new event
   const [type, setType] = useState(0);
@@ -63,7 +63,7 @@ const parseDate = (text: string) => {
   const [, dd, mm, yy] = match;
   const year = 2000 + Number(yy);
 
-  // JavaScript quietly turns 31-02 into 3 March, so we check that the date stayed the same
+  // JavaScript turns 31-02 into 3 March, so we check that the date stayed the same
   const check = new Date(year, Number(mm) - 1, Number(dd));
   if (
     check.getFullYear() !== year ||
@@ -156,11 +156,11 @@ const parseDate = (text: string) => {
           <View style={styles.twoColumns}>
             <View style={styles.column}>
               <Text style={styles.label}>Dato</Text>
-              <TextInput style={styles.input} value={date} onChangeText={setDate} placeholder="01-03-26" />
+              <TextInput style={styles.input} value={date} onChangeText={setDate} placeholder="DD-MM-YY" />
             </View>
             <View style={styles.column}>
               <Text style={styles.label}>Tidspunkt</Text>
-              <TextInput style={styles.input} value={time} onChangeText={setTime} placeholder="18:00" />
+              <TextInput style={styles.input} value={time} onChangeText={setTime} placeholder="HH:MM" />
             </View>
           </View>
 
