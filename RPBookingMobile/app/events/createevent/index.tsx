@@ -28,6 +28,8 @@ export default function CreateEventPage() {
   const [price, setPrice] = useState("");
   const [minParticipant, setMinParticipant] = useState("");
   const [maxParticipant, setMaxParticipant] = useState("");
+  const [address, setAddress] = useState("");
+const [city, setCity] = useState("");
   const [privateEvent, setPrivateEvent] = useState(false);
   const [status, setStatus] = useState(2); // "Planlagt" as default for a new event
   const [type, setType] = useState(0);
@@ -37,8 +39,11 @@ export default function CreateEventPage() {
   {/* Checks the fields before sending. Returns an error text, or "" if everything is fine */}
   const validate = () => {
     if (!title.trim()) return "Skriv en titel";
-if (!parseDate(date)) return "Dato skal skrives som DD-MM-ÅÅ, fx 01-03-26";
-if (!/^\d{2}:\d{2}$/.test(time)) return "Tidspunkt skal skrives som TT:MM";
+    if (!parseDate(date)) return "Dato skal skrives som DD-MM-ÅÅ, fx 01-03-26";
+    if (!/^\d{2}:\d{2}$/.test(time)) return "Tidspunkt skal skrives som TT:MM";
+
+    if (!address.trim()) return "Skriv en adresse";
+    if (!city.trim()) return "Skriv en by";
 
     const numbers = [ageRes, price, minParticipant, maxParticipant];
     if (numbers.some((n) => n.trim() === "" || Number.isNaN(toNumber(n)))) {
@@ -83,6 +88,8 @@ const parseDate = (text: string) => {
   const newEvent: CreateEvent = {
     title: title.trim(),
     description: description.trim(),
+    address: address.trim(),
+    city: city.trim(),
     date: `${parseDate(date)}T${time}:00`,
     ageRes: toNumber(ageRes),
     price: toNumber(price),
@@ -139,6 +146,12 @@ const parseDate = (text: string) => {
             multiline
             textAlignVertical="top"
           />
+
+          <Text style={styles.label}>Adresse</Text>
+          <TextInput style={styles.input} value={address} onChangeText={setAddress} placeholder="Fx Vestergade 12" />
+
+          <Text style={styles.label}>By</Text>
+          <TextInput style={styles.input} value={city} onChangeText={setCity} placeholder="Fx Odense" />
 
           <View style={styles.twoColumns}>
             <View style={styles.column}>

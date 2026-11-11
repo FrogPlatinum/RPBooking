@@ -118,6 +118,10 @@ export default function FullEventDescription() {
                 </Text>
               </View>
               <View style={styles.row}>
+              <Text style={styles.label}>Sted</Text>
+              <Text style={styles.value}>{event.address}, {event.city}</Text>
+              </View>
+              <View style={styles.row}>
                 <Text style={styles.label}>Type</Text>
                 <Text style={styles.value}>{typeLabel(event.type)}</Text>
               </View>
