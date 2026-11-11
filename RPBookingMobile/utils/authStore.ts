@@ -4,14 +4,13 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 type UserState = {
     isLoggedIn: boolean;
-    shouldCreateAccount: boolean;
-    hasCompletedOnboarding: boolean;
+    hasCompletedSignUp: boolean;
     isAdmin: boolean;
 
 
     logIn:() => void;
     logOut:() => void;
-    completeOnboarding:() => void;
+    completeSignUp:() => void;
     resetOnboarding:() => void;
     logInAsAdmin: () => void;
 }
@@ -19,10 +18,9 @@ type UserState = {
 export const useAuthStore = create(
     persist<UserState>((set) => ({
 
-    isLoggedIn: false,
-    shouldCreateAccount: false,
-    hasCompletedOnboarding: false,
-    isAdmin: false,
+    isLoggedIn: true,
+    hasCompletedSignUp: true,
+    isAdmin: true,
 
     logIn: () => {
         set((state) => {
@@ -43,11 +41,11 @@ export const useAuthStore = create(
         });    
     },
 
-    completeOnboarding: () => {
+    completeSignUp: () => {
         set((state) => {
             return{
             ...state,
-            hasCompletedOnboarding:true,
+            hasCompletedSignUp:true,
         };
         });    
     },
@@ -56,7 +54,7 @@ export const useAuthStore = create(
         set((state) => {
             return{
             ...state,
-            hasCompletedOnboarding:false,
+            hasCompletedSignUp:false,
             isLoggedIn: false,
             isAdmin:false,
         };
