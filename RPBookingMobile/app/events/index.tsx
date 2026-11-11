@@ -1,8 +1,9 @@
 import { getEvents as fetchEvents } from "@/services/eventService";
 import { Event as EventItem } from "@/types/event";
+import { useAuthStore } from "@/utils/authStore";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { useRouter, useFocusEffect } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import { ActivityIndicator, FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
 
@@ -80,6 +81,7 @@ export default function Events() {
     }
   }, []);
 
+  const {isAdmin} = useAuthStore();
 
 
 {/* Runs getEvents every time the page is shown, also when coming back from another page */}
@@ -127,13 +129,17 @@ useFocusEffect(
                 </Pressable>
 
                 {/* Button that opens the page for adding a new event */}
+
+   {isAdmin && (       
     <Pressable
       style={styles.addButton}
-      onPress={() => router.push("../events/createevent/index")}
+      onPress={() => router.push("/events/createevent")}
       hitSlop={12}
     >
       <Ionicons name="add" size={28} color="#5a4a1f" />
-    </Pressable>
+    </Pressable>)
+  }
+
 
               <Image
                source={require("../../assets/images/TempIcon.png")}
