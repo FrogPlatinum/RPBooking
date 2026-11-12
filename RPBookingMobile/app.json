@@ -4,7 +4,7 @@
     "slug": "RPBookingMobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/TempIcon.png",
+    "icon": "./assets/images/LogoGames.png",
     "scheme": "rpbookingmobile",
     "userInterfaceStyle": "automatic",
     "ios": {
@@ -22,7 +22,7 @@
     },
     "web": {
       "output": "server",
-      "favicon": "./assets/images/TempIcon.png"
+      "favicon": "./assets/images/LogoGames.png"
     },
     "plugins": [
       [

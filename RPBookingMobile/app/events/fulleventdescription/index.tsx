@@ -96,7 +96,7 @@ export default function FullEventDescription() {
             <Ionicons name="arrow-back" size={24} color="#5a4a1f" />
           </Pressable>
           <Image
-            source={require("../../../assets/images/TempIcon.png")}
+            source={require("../../../assets/images/LogoGames.png")}
             style={styles.logo}
             resizeMode="contain"
           />
