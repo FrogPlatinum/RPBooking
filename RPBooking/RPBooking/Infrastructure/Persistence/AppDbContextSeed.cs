@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RPBooking.Features.Bookings;
 using RPBooking.Features.Events;
+using RPBooking.Features.Identity;
 using static RPBooking.Features.Events.Event;
 
 namespace RPBooking.Infrastructure.Persistence
@@ -25,6 +26,18 @@ namespace RPBooking.Infrastructure.Persistence
         //Seed data
         public static async Task SeedDataAsync(AppDbContext context)
         {
+            new User
+            {
+                Id = 1,
+                Name = "Ellen",
+                PasswordHash = "ABC1234",
+                Age = 31,
+                Email = "Ellen@gmail.com",
+                Phone = "12223311",
+                Role = User.UserRole.User
+
+            }; 
+            
             var sampleParticipants = new List<Participant>
             {
                 new() { Name = "Tom", Age = 33 },
@@ -37,9 +50,8 @@ namespace RPBooking.Infrastructure.Persistence
             {
                 new()
                 {
-                    ContactName = "Tom",
-                    ContactEmail = "Tom@Test.com",
-                    PhoneNumber = "12345678",
+                    EventId = 1,
+                    UserId = 1,
                     Note = "Looking forward to it",
                     Participants = sampleParticipants
                 }
@@ -50,6 +62,7 @@ namespace RPBooking.Infrastructure.Persistence
             {
                 new()
                 {
+                    Id = 1,
                     Title = "D&D 5e: One-Shot Campaign",
                     Description = "An immersive tabletop roleplaying session for beginner to intermediate adventurers.",
                     Date = DateTime.UtcNow.AddDays(7),
