@@ -13,6 +13,7 @@ namespace RPBooking.Features.Events
         public int AgeRes { get; set; }
         public double Price { get; set; }
         public int MinParticipant { get; set; }
+        public int CurrentParticipant { get; set; }
         public int MaxParticipant { get; set; }
         public bool PrivateEvent { get; set; }
         public List<Booking> Bookings { get; set; } = new();
