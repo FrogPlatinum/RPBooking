@@ -11,9 +11,7 @@ namespace RPBooking.Features.Bookings.GetBookingById
         public record Response(
             int Id,
             int EventId,
-            string ContactName,
-            string ContactEmail,
-            string PhoneNumber,
+            int UserId,
             int ParticipantCount,
             List<Participant> Participants,
             string? Note
@@ -34,16 +32,14 @@ namespace RPBooking.Features.Bookings.GetBookingById
                     new Response(
                         b.Id,
                         b.EventId,
-                        b.ContactName,
-                        b.ContactEmail,
-                        b.PhoneNumber,
+                        b.UserId,
                         b.Participants.Count,
                         b.Participants,
                         b.Note
                         ))
                         .FirstOrDefaultAsync(cancellationToken);
-                
-                if(result == null)
+
+                if (result is null)
                 {
                     throw new NotFoundException();
                 }
