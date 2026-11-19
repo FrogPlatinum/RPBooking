@@ -13,7 +13,7 @@ export default function Index() {
   {/* button shown on the front page that links to the events page */}
   return (
     <LinearGradient
-      colors={["#f2e7b1", "#f3f0de"]}
+      colors={["#e2a6ad",  "#290068"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.container}

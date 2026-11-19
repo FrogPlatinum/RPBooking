@@ -117,7 +117,7 @@ const parseDate = (text: string) => {
   {/* KeyboardAvoidingView + ScrollView = the keyboard does not cover the fields */}
   return (
     <LinearGradient
-      colors={["#f2e7b1", "#f3f0de"]}
+      colors={["#e2a6ad",  "#290068"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.container}
