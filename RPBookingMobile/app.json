@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "SolskinGames",
-    "slug": "RPBookingMobile",
+    "name": "Augur Games",
+    "slug": "augurgames",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/LogoGames.png",
