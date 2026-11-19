@@ -11,9 +11,7 @@ namespace RPBooking.Features.Bookings.GetBookings
         public record BookingDto(
             int Id,
             int EventId,
-            string ContactName,
-            string ContactEmail,
-            string PhoneNumber,
+            int UserId,
             int ParticipantCount,
             List<Participant> Participants,
             string? Note
@@ -39,9 +37,7 @@ namespace RPBooking.Features.Bookings.GetBookings
                     .Select(b => new BookingDto(
                     b.Id,
                     b.EventId,
-                    b.ContactName,
-                    b.ContactEmail,
-                    b.PhoneNumber,
+                    b.UserId,
                     b.Participants.Count,
                     b.Participants,
                     b.Note

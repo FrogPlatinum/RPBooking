@@ -1,7 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using RPBooking.Exceptions;
+using RPBooking.Features.Identity;
 using RPBooking.Infrastructure.Persistence;
+
 
 namespace RPBooking.Features.Bookings.CreateBooking
 {
@@ -10,9 +13,7 @@ namespace RPBooking.Features.Bookings.CreateBooking
         //Command
         public record Command(
             int EventId,
-            string ContactName,
-            string ContactEmail,
-            string PhoneNumber,
+            int UserId,
             List<Participant> Participants,
             string? Note
             ) : IRequest<int>;
@@ -22,22 +23,50 @@ namespace RPBooking.Features.Bookings.CreateBooking
         {
             public async Task<int> Handle(Command request, CancellationToken cancellationToken)
             {
-                var newBooking = new Booking
-                {
-                    EventId = request.EventId,
-                    ContactName = request.ContactName,
-                    ContactEmail = request.ContactEmail,
-                    PhoneNumber = request.PhoneNumber,
-                    Participants = request.Participants,
-                    Note = request.Note
-                };
+                //Find event
+                var eventEntity = await context.Events
+                    .Include(e => e.Bookings)
+                    .ThenInclude(b => b.Participants)
+                    .FirstOrDefaultAsync(e => e.Id == request.EventId, cancellationToken);
 
-                if (newBooking == null)
+                //Check if entity exists
+                if (eventEntity is null)
+                {
+                    throw new NotFoundException();
+                }
+
+                //Business rule: Is Event available?
+                if(eventEntity.Status != Events.Event.EventStatus.Scheduled)
                 {
                     throw new UnprocessableEntityException();
                 }
 
+                //Business rule: Check capacity
+                var incomingCount = request.Participants.Count();
+                if(eventEntity.CurrentParticipant + incomingCount > eventEntity.MaxParticipant)
+                {
+                    throw new UnprocessableEntityException();
+                }
+
+                //Create booking
+                var newBooking = new Booking
+                {
+                    EventId = request.EventId,
+                    UserId = request.UserId,
+                    Participants = request.Participants,
+                    Note = request.Note
+                };
+
                 context.Bookings.Add( newBooking );
+
+                //Update Event state
+                eventEntity.CurrentParticipant += incomingCount;
+
+                if(eventEntity.CurrentParticipant >= eventEntity.MaxParticipant)
+                {
+                    eventEntity.Status = Events.Event.EventStatus.Full;
+                }
+
                 await context.SaveChangesAsync(cancellationToken);
 
                 return newBooking.Id;

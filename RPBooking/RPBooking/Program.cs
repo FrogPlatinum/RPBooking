@@ -26,6 +26,10 @@ namespace RPBooking
                 (options => options.UseSqlServer
                 (builder.Configuration.GetConnectionString("DomainDBConnection")));
 
+            builder.Services.AddDbContext<UserDbContext>
+                (options => options.UseSqlServer
+                (builder.Configuration.GetConnectionString("UserDBConnection")));
+
             //Registering MediatR
             builder.Services.AddMediatR(typeof(Program));
 

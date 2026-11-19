@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using RPBooking.Exceptions;
 using RPBooking.Infrastructure.Persistence;
 
@@ -8,10 +9,6 @@ namespace RPBooking.Features.Bookings.UpdateBooking
     {
         //Request DTO
         public record UpdateBookingRequest(
-            string? EventId = null,
-            string? ContactName = null,
-            string? ContactEmail = null,
-            string? PhoneNumber = null,
             List<Participant>? Participants = null,
             string? Note = null
             );
@@ -19,10 +16,6 @@ namespace RPBooking.Features.Bookings.UpdateBooking
         //Command
         public record Command(
             int Id,
-            string? EventId,
-            string? ContactName,            
-            string? ContactEmail,
-            string? PhoneNumber,
             List<Participant>? Participants,
             string? Note
             ) : IRequest<bool>;
@@ -31,36 +24,58 @@ namespace RPBooking.Features.Bookings.UpdateBooking
         {
             public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
             {
-                //Find
-                var bookingToUpdate = await context.Bookings.FindAsync([request.Id], cancellationToken);
+                //Find booking and related event and participants
+                var bookingToUpdate = await context.Bookings
+                    .Include(b => b.Event)
+                    .Include(b => b.Participants)
+                    .FirstOrDefaultAsync(b => b.Id == request.Id, cancellationToken);
                 
                 //Handle if not found
                 if (bookingToUpdate == null)
                 {
                     throw new NotFoundException();
                 }
-                //Update
-                if (request.ContactName != null)
+                
+                //Handle participant count changes and capacity validation
+                if(request.Participants != null)
                 {
-                    bookingToUpdate.ContactName = request.ContactName;
-                }
-                if (request.ContactEmail != null)
-                {
-                    bookingToUpdate.ContactEmail = request.ContactEmail;
-                }
-                if (request.PhoneNumber != null)
-                {
-                    bookingToUpdate.PhoneNumber = request.PhoneNumber;
-                }
-                if (request.Participants != null)
-                {
+                    var oldParticipantCount = bookingToUpdate.Participants.Count;
+                    var newParticipantCount = request.Participants.Count;
+                    var difference = newParticipantCount - oldParticipantCount;
+
+                    //Handle adding more participants
+                    if(difference > 0)
+                    {
+                        var eventEntity = bookingToUpdate.Event;
+                        if(eventEntity.CurrentParticipant + difference > eventEntity.MaxParticipant)
+                        {
+                            throw new BadRequestException();
+                        }
+                    }
+
+                    //Handle if removing participants. Decrease counter and open event
+                    else if(difference < 0)
+                    {
+                        var eventEntity = bookingToUpdate.Event;
+                        eventEntity.CurrentParticipant += difference;
+
+                        if(eventEntity.Status == Events.Event.EventStatus.Full && eventEntity.CurrentParticipant < eventEntity.MaxParticipant)
+                        {
+                            eventEntity.Status = Events.Event.EventStatus.Scheduled;
+                        }
+
+                    }
+
                     bookingToUpdate.Participants = request.Participants;
                 }
-                if (request.Note != null)
+                
+                //Update note if provided
+                if(request.Note != null)
                 {
                     bookingToUpdate.Note = request.Note;
                 }
-                await context.SaveChangesAsync();
+
+                await context.SaveChangesAsync(cancellationToken);
                 return true;
             }
         }
@@ -71,17 +86,12 @@ namespace RPBooking.Features.Bookings.UpdateBooking
             {
                 var command = new Command(
                     id,
-                    request.EventId,
-                    request.ContactName,
-                    request.ContactEmail,
-                    request.PhoneNumber,
                     request.Participants,
                     request.Note
                 );
 
-                var success = await mediator.Send(command);
-
-                return success ? Results.NoContent() : Results.NotFound(new NotFoundException());
+                await mediator.Send(command);
+                return Results.NoContent();
             });
         }
     }
