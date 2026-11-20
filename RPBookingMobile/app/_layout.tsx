@@ -12,7 +12,7 @@ export default function RootLayout() {
       </Stack.Protected>
       
       <Stack.Protected guard={!isLoggedIn && hasCompletedSignUp}>
-      <Stack.Screen name="logIn"/>
+      <Stack.Screen name="user"/>
       {/* <Stack.Protected guard={hasCompletedSignUp}>
         <Stack.Screen name="create-account"/> 
       </Stack.Protected> */}
