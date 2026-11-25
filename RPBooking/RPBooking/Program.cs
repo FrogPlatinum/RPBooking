@@ -49,10 +49,11 @@ namespace RPBooking
             {
                 //Temp scope to resolve scoped services
                 using var scope = app.Services.CreateScope();
-                var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-                
+                var AppContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                var UserContext = scope.ServiceProvider.GetRequiredService<UserDbContext>();
+
                 //Run Migration and Seed data
-                await AppDbContextSeed.SeedAsync(context); 
+                await AppDbContextSeed.SeedAsync(AppContext, UserContext); 
 
                 app.MapOpenApi();
 

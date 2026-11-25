@@ -8,27 +8,27 @@ namespace RPBooking.Infrastructure.Persistence
 {
     public static class AppDbContextSeed
     {
-        public static async Task SeedAsync(AppDbContext context)
+        public static async Task SeedAsync(AppDbContext AppContext, UserDbContext UserContext)
         {
             //Ensure Migrations are applied automatically
-            await context.Database.MigrateAsync();
+            await AppContext.Database.MigrateAsync();
+            await UserContext.Database.MigrateAsync();
 
             //Only seed if events are missing
-            if (await context.Events.AnyAsync())
+            if (await AppContext.Events.AnyAsync())
             {
                 return;
             }
 
             //Seed initial baseline data
-            await SeedDataAsync(context);
+            await SeedDataAsync(AppContext, UserContext);
 
         }
         //Seed data
-        public static async Task SeedDataAsync(AppDbContext context)
+        public static async Task SeedDataAsync(AppDbContext AppContext, UserDbContext UserContext)
         {
-            var sampleUser = new User
-            {
-                Id = 1,
+            var ellen = new User
+            {                
                 Name = "Ellen",
                 PasswordHash = "ABC1234",
                 Age = 31,
@@ -37,7 +37,9 @@ namespace RPBooking.Infrastructure.Persistence
                 Role = User.UserRole.User
 
             };
-            await context.AddAsync(sampleUser);
+
+            await UserContext.AddAsync(ellen);
+            await UserContext.SaveChangesAsync();
             
             var sampleParticipants = new List<Participant>
             {
@@ -51,8 +53,7 @@ namespace RPBooking.Infrastructure.Persistence
             {
                 new()
                 {
-                    EventId = 1,
-                    UserId = 1,
+                    UserId = ellen.Id,
                     Note = "Looking forward to it",
                     Participants = sampleParticipants
                 }
@@ -63,7 +64,6 @@ namespace RPBooking.Infrastructure.Persistence
             {
                 new()
                 {
-                    Id = 1,
                     Title = "D&D 5e: One-Shot Campaign",
                     Description = "An immersive tabletop roleplaying session for beginner to intermediate adventurers.",
                     Date = DateTime.UtcNow.AddDays(7),
@@ -97,8 +97,8 @@ namespace RPBooking.Infrastructure.Persistence
                 }
             };
 
-            await context.Events.AddRangeAsync(sampleEvents);
-            await context.SaveChangesAsync();
+            await AppContext.Events.AddRangeAsync(sampleEvents);
+            await AppContext.SaveChangesAsync();
         }
     }
 }
