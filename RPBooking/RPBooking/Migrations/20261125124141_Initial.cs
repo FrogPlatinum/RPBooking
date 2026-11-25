@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace RPBooking.Migrations.UserDb
+namespace RPBooking.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration

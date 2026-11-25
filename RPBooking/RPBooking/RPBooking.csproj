@@ -31,6 +31,7 @@
   <ItemGroup>
     <Folder Include="Features\Bookings\BookEvent\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Migrations\UserDb\" />
   </ItemGroup>
 
 </Project>

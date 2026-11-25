@@ -85,7 +85,7 @@ export default function FullEventDescription() {
   {/* isLoading = While loading, show a spinner. Then show an error or the event */}
   return (
     <LinearGradient
-      colors={["#f2e7b1", "#f3f0de"]}
+      colors={["#e2a6ad",  "#290068"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.container}

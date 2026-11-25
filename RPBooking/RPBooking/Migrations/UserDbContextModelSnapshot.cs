@@ -7,7 +7,7 @@ using RPBooking.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace RPBooking.Migrations.UserDb
+namespace RPBooking.Migrations
 {
     [DbContext(typeof(UserDbContext))]
     partial class UserDbContextModelSnapshot : ModelSnapshot

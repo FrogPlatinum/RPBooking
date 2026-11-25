@@ -8,11 +8,11 @@ using RPBooking.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace RPBooking.Migrations.UserDb
+namespace RPBooking.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20261124101928_stuff")]
-    partial class stuff
+    [Migration("20261125124141_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -9,10 +9,10 @@ using RPBooking.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace RPBooking.Migrations
+namespace RPBooking.Migrations.AppDb
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20261119110638_Initial")]
+    [Migration("20261125124203_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

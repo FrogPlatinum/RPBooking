@@ -117,7 +117,7 @@ const parseDate = (text: string) => {
   {/* KeyboardAvoidingView + ScrollView = the keyboard does not cover the fields */}
   return (
     <LinearGradient
-      colors={["#f2e7b1", "#f3f0de"]}
+      colors={["#e2a6ad",  "#290068"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.container}
@@ -220,7 +220,7 @@ const parseDate = (text: string) => {
             <Switch
               value={privateEvent}
               onValueChange={setPrivateEvent}
-              trackColor={{ false: "#ccc", true: "#5a4a1f" }}
+              trackColor={{ false: "#ccc", true: "#4D9DE0" }}
               thumbColor="#fff"
             />
           </View>
@@ -267,10 +267,10 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 28,
     fontWeight: "700",
-    color: "#5a4a1f",
+    color: "#F4F1BB",
   },
   label: {
-    color: "#5a4a1f",
+    color: "#F4F1BB",
     fontSize: 14,
     fontWeight: "600",
     marginBottom: 6,
@@ -306,14 +306,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     borderRadius: 999,
     borderWidth: 1,
-    borderColor: "#5a4a1f",
+    borderColor: "#F4F1BB",
     backgroundColor: "#fff",
   },
   chipActive: {
-    backgroundColor: "#5a4a1f",
+    backgroundColor: "#4D9DE0",
   },
   chipText: {
-    color: "#5a4a1f",
+    color: "#616163",
     fontSize: 14,
   },
   chipTextActive: {
@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   switchLabel: {
-    color: "#5a4a1f",
+    color: "#F4F1BB",
     fontSize: 16,
     fontWeight: "600",
   },
@@ -337,7 +337,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   submit: {
-    backgroundColor: "#5a4a1f",
+    backgroundColor: "#4D9DE0",
     borderRadius: 999,
     paddingVertical: 14,
     alignItems: "center",

@@ -99,7 +99,7 @@ useFocusEffect(
   {/* ListEmptyComponent = If no events, show a message */}
   return (
     <LinearGradient
-      colors={["#f2e7b1", "#f3f0de"]}
+      colors={["#e2a6ad",  "#290068"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.container}
@@ -306,6 +306,6 @@ const styles = StyleSheet.create({
     height: 100,
     borderWidth: 2,
   borderColor: "#391b64",
-  borderRadius: 16,
+  borderRadius: 56,
   },
 });

@@ -12,7 +12,7 @@ type Props = Omit<PressableProps, "children" | "style"> & {
 
 {/* Grid button that checks its pressed state so it can change its appearance when pressed */}
 export const GridButton = forwardRef<View, Props>(function GridButton(
-  { title, color = "57,27,100", pressedColor = "184, 134, 11", ...rest },
+  { title, color = "244, 241, 187", pressedColor = "77, 157, 224", ...rest },
   ref
 ) {
 
