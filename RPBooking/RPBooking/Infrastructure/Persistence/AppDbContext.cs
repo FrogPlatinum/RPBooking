@@ -27,7 +27,7 @@ namespace RPBooking.Infrastructure.Persistence
                 .HasMaxLength(2000);
 
                 builder.HasMany(e => e.Bookings)
-                .WithOne()
+                .WithOne(b => b.Event)
                 .HasForeignKey("EventId")
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -35,6 +35,8 @@ namespace RPBooking.Infrastructure.Persistence
 
             modelBuilder.Entity<Booking>(builder =>
             {
+                builder.Ignore(b => b.User);
+
                 builder.HasMany(b => b.Participants)
                 .WithOne()
                 .HasForeignKey("BookingId")

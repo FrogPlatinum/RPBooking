@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <Folder Include="Features\Bookings\BookEvent\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

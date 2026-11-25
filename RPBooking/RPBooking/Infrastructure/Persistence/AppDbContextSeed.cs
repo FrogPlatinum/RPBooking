@@ -26,7 +26,7 @@ namespace RPBooking.Infrastructure.Persistence
         //Seed data
         public static async Task SeedDataAsync(AppDbContext context)
         {
-            new User
+            var sampleUser = new User
             {
                 Id = 1,
                 Name = "Ellen",
@@ -36,7 +36,8 @@ namespace RPBooking.Infrastructure.Persistence
                 Phone = "12223311",
                 Role = User.UserRole.User
 
-            }; 
+            };
+            await context.AddAsync(sampleUser);
             
             var sampleParticipants = new List<Participant>
             {

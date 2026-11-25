@@ -12,8 +12,8 @@ using RPBooking.Infrastructure.Persistence;
 namespace RPBooking.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260923111121_UpdateWithBooking")]
-    partial class UpdateWithBooking
+    [Migration("20261119110638_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,23 +33,14 @@ namespace RPBooking.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ContactEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("EventId")
+                    b.Property<int>("EventId")
                         .HasColumnType("int");
 
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -91,7 +82,18 @@ namespace RPBooking.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("AgeRes")
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CurrentParticipant")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
@@ -132,10 +134,13 @@ namespace RPBooking.Migrations
 
             modelBuilder.Entity("RPBooking.Features.Bookings.Booking", b =>
                 {
-                    b.HasOne("RPBooking.Features.Events.Event", null)
+                    b.HasOne("RPBooking.Features.Events.Event", "Event")
                         .WithMany("Bookings")
                         .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
                 });
 
             modelBuilder.Entity("RPBooking.Features.Bookings.Participant", b =>
